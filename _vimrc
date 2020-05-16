@@ -44,7 +44,7 @@ map <F2> <leader>c<space>
 nmap <F3> :AuthorInfoDetect<cr>
 let g:vimrc_author = 'XingguangJushi'
 let g:vimrc_email = 'antcxgjs@gmail.com'
-let g:vimrc_email = 'www.blogspot.com/followstars'
+let g:vimrc_homepage = 'https://www.blogspot.com/followstars'
 
 "用xptemplate插件实现代码自动补全并设置快捷键为F9（插入状态下使用）
 let g:xptemplate_key = '<F9>'	
