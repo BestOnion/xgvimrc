@@ -42,8 +42,9 @@ map <F2> <leader>c<space>
 
 "用authorinfo插件实现自动添加作者信息并设置快捷键为F3
 nmap <F3> :AuthorInfoDetect<cr>
-let g:vimrc_author = 'Chen'
-let g:vimrc_email = 'antcantc@163.com'
+let g:vimrc_author = 'XingguangJushi'
+let g:vimrc_email = 'antcxgjs@gmail.com'
+let g:vimrc_email = 'www.blogspot.com/followstars'
 
 "用xptemplate插件实现代码自动补全并设置快捷键为F9（插入状态下使用）
 let g:xptemplate_key = '<F9>'	
