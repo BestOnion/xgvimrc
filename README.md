@@ -1,6 +1,7 @@
-# xgvimrc
+﻿# xgvimrc
 XingguangJushi's vimrc
 
+https://github.com/xingguangjushi/xgvimrc
 _vimrc是基本配置文件
 插件覆盖到vim安装目录下
 ctags.exe放到系统PATH环境变量的目录中
