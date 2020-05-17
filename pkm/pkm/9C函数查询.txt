@@ -1,0 +1,3756 @@
+感谢互联网，感谢乐于分享的朋友！
+
+本人使用“C语言速查手册”时，其索引太让人头痛。
+
+故使用“CHMShellv2.01”，将其反编译，整理后，用“HTML Help Workshop”重新生成的。
+
+Enjoy It!
+
+
+
+Loom
+
+2010-10-18
+
+
+
+
+
+函数名: cabs
+
+功 能: 计算复数的绝对值
+
+用 法: double cabs(struct complex z);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+struct complex z;
+
+double val;
+
+z.x = 2.0;
+
+z.y = 1.0;
+
+val = cabs(z);
+
+printf("The absolute value of %.2lfi %.2lfj is %.2lf", z.x, z.y, val);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: calloc
+
+功 能: 分配主存储器
+
+用 法: void *calloc(size_t nelem, size_t elsize);
+
+程序例:
+
+#include <stdio.h>
+
+#include <alloc.h>
+
+int main(void)
+
+{
+
+char *str = NULL;
+
+/* allocate memory for string */
+
+str = calloc(10, sizeof(char));
+
+/* copy "Hello" into string */
+
+strcpy(str, "Hello");
+
+/* display string */
+
+printf("String is %s\n", str);
+
+/* free memory */
+
+free(str);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: ceil
+
+功 能: 向上舍入
+
+用 法: double ceil(double x);
+
+程序例:
+
+#include <math.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+double number = 123.54;
+
+double down, up;
+
+down = floor(number);
+
+up = ceil(number);
+
+printf("original number %5.2lf\n", number);
+
+printf("number rounded down %5.2lf\n", down);
+
+printf("number rounded up %5.2lf\n", up);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: cgets
+
+功 能: 从控制台读字符串
+
+用 法: char *cgets(char *str);
+
+程序例:
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+char buffer[83];
+
+char *p;
+
+/* There's space for 80 characters plus the NULL terminator */
+
+buffer[0] = 81;
+
+printf("Input some chars:");
+
+p = cgets(buffer);
+
+printf("\ncgets read %d characters: \"%s\"\n", buffer[1], p);
+
+printf("The returned pointer is %p, buffer[0] is at %p\n", p, &buffer);
+
+/* Leave room for 5 characters plus the NULL terminator */
+
+buffer[0] = 6;
+
+printf("Input some chars:");
+
+p = cgets(buffer);
+
+printf("\ncgets read %d characters: \"%s\"\n", buffer[1], p);
+
+printf("The returned pointer is %p, buffer[0] is at %p\n", p, &buffer);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: chdir
+
+功 能: 改变工作目录
+
+用 法: int chdir(const char *path);
+
+程序例:
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <dir.h>
+
+char old_dir[MAXDIR];
+
+char new_dir[MAXDIR];
+
+int main(void)
+
+{
+
+if (getcurdir(0, old_dir))
+
+{
+
+perror("getcurdir()");
+
+exit(1);
+
+}
+
+printf("Current directory is: \\%s\n", old_dir);
+
+if (chdir("\\"))
+
+{
+
+perror("chdir()");
+
+exit(1);
+
+}
+
+if (getcurdir(0, new_dir))
+
+{
+
+perror("getcurdir()");
+
+exit(1);
+
+}
+
+printf("Current directory is now: \\%s\n", new_dir);
+
+printf("\nChanging back to orignal directory: \\%s\n", old_dir);
+
+if (chdir(old_dir))
+
+{
+
+perror("chdir()");
+
+exit(1);
+
+}
+
+return 0;
+
+}
+
+
+
+
+
+函数名: _chmod, chmod
+
+功 能: 改变文件的访问方式
+
+用 法: int chmod(const char *filename, int permiss);
+
+程序例:
+
+#include <sys\stat.h>
+
+#include <stdio.h>
+
+#include <io.h>
+
+void make_read_only(char *filename);
+
+int main(void)
+
+{
+
+make_read_only("NOTEXIST.FIL");
+
+make_read_only("MYFILE.FIL");
+
+return 0;
+
+}
+
+void make_read_only(char *filename)
+
+{
+
+int stat;
+
+stat = chmod(filename, S_IREAD);
+
+if (stat)
+
+printf("Couldn't make %s read-only\n", filename);
+
+else
+
+printf("Made %s read-only\n", filename);
+
+}
+
+
+
+
+
+函数名: chsize
+
+功 能: 改变文件大小
+
+用 法: int chsize(int handle, long size);
+
+程序例:
+
+#include <string.h>
+
+#include <fcntl.h>
+
+#include <io.h>
+
+int main(void)
+
+{
+
+int handle;
+
+char buf[11] = "0123456789";
+
+/* create text file containing 10 bytes */
+
+handle = open("DUMMY.FIL", O_CREAT);
+
+write(handle, buf, strlen(buf));
+
+/* truncate the file to 5 bytes in size */
+
+chsize(handle, 5);
+
+/* close the file */
+
+close(handle);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: circle
+
+功 能: 在给定半径以(x, y)为圆心画圆
+
+用 法: void far circle(int x, int y, int radius);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+int midx, midy;
+
+int radius = 100;
+
+/* initialize graphics and local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+midx = getmaxx() / 2;
+
+midy = getmaxy() / 2;
+
+setcolor(getmaxcolor());
+
+/* draw the circle */
+
+circle(midx, midy, radius);
+
+/* clean up */
+
+getch();
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: cleardevice
+
+功 能: 清除图形屏幕
+
+用 法: void far cleardevice(void);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+int midx, midy;
+
+/* initialize graphics and local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+midx = getmaxx() / 2;
+
+midy = getmaxy() / 2;
+
+setcolor(getmaxcolor());
+
+/* for centering screen messages */
+
+settextjustify(CENTER_TEXT, CENTER_TEXT);
+
+/* output a message to the screen */
+
+outtextxy(midx, midy, "press any key to clear the screen:");
+
+/* wait for a key */
+
+getch();
+
+/* clear the screen */
+
+cleardevice();
+
+/* output another message */
+
+outtextxy(midx, midy, "press any key to quit:");
+
+/* clean up */
+
+getch();
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: clearerr
+
+功 能: 复位错误标志
+
+用 法:void clearerr(FILE *stream);
+
+程序例:
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+FILE *fp;
+
+char ch;
+
+/* open a file for writing */
+
+fp = fopen("DUMMY.FIL", "w");
+
+/* force an error condition by attempting to read */
+
+ch = fgetc(fp);
+
+printf("%c\n",ch);
+
+if (ferror(fp))
+
+{
+
+/* display an error message */
+
+printf("Error reading from DUMMY.FIL\n");
+
+/* reset the error and EOF indicators */
+
+clearerr(fp);
+
+}
+
+fclose(fp);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: clearviewport
+
+功 能: 清除图形视区
+
+用 法: void far clearviewport(void);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+#define CLIP_ON 1 /* activates clipping in viewport */
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+int ht;
+
+/* initialize graphics and local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+setcolor(getmaxcolor());
+
+ht = textheight("W");
+
+/* message in default full-screen viewport */
+
+outtextxy(0, 0, "* <-- (0, 0) in default viewport");
+
+/* create a smaller viewport */
+
+setviewport(50, 50, getmaxx()-50, getmaxy()-50, CLIP_ON);
+
+/* display some messages */
+
+outtextxy(0, 0, "* <-- (0, 0) in smaller viewport");
+
+outtextxy(0, 2*ht, "Press any key to clear viewport:");
+
+/* wait for a key */
+
+getch();
+
+/* clear the viewport */
+
+clearviewport();
+
+/* output another message */
+
+outtextxy(0, 0, "Press any key to quit:");
+
+/* clean up */
+
+getch();
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: _close, close
+
+功 能: 关闭文件句柄
+
+用 法: int close(int handle);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+#include <fcntl.h>
+
+#include <io.h>
+
+main()
+
+{
+
+int handle;
+
+char buf[11] = "0123456789";
+
+/* create a file containing 10 bytes */
+
+handle = open("NEW.FIL", O_CREAT);
+
+if (handle > -1)
+
+{
+
+write(handle, buf, strlen(buf));
+
+/* close the file */
+
+close(handle);
+
+}
+
+else
+
+{
+
+printf("Error opening file\n");
+
+}
+
+return 0;
+
+}
+
+
+
+
+
+函数名: clock
+
+功 能: 确定处理器时间
+
+用 法: clock_t clock(void);
+
+程序例:
+
+#include <time.h>
+
+#include <stdio.h>
+
+#include <dos.h>
+
+int main(void)
+
+{
+
+clock_t start, end;
+
+start = clock();
+
+delay(2000);
+
+end = clock();
+
+printf("The time was: %f\n", (end - start) / CLK_TCK);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: closegraph
+
+功 能: 关闭图形系统
+
+用 法: void far closegraph(void);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+int x, y;
+
+/* initialize graphics mode */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error
+
+occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+x = getmaxx() / 2;
+
+y = getmaxy() / 2;
+
+/* output a message */
+
+settextjustify(CENTER_TEXT, CENTER_TEXT);
+
+outtextxy(x, y, "Press a key to close the graphics system:");
+
+/* wait for a key */
+
+getch();
+
+/* closes down the graphics system */
+
+closegraph();
+
+printf("We're now back in text mode.\n");
+
+printf("Press any key to halt:");
+
+getch();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: clreol
+
+功 能: 在文本窗口中清除字符到行末
+
+用 法: void clreol(void);
+
+程序例:
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+clrscr();
+
+cprintf("The function CLREOL clears all characters from the\r\n");
+
+cprintf("cursor position to the end of the line within the\r\n");
+
+cprintf("current text window, without moving the cursor.\r\n");
+
+cprintf("Press any key to continue . . .");
+
+gotoxy(14, 4);
+
+getch();
+
+clreol();
+
+getch();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: clrscr
+
+功 能: 清除文本模式窗口
+
+用 法: void clrscr(void);
+
+程序例:
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+int i;
+
+clrscr();
+
+for (i = 0; i < 20; i++)
+
+cprintf("%d\r\n", i);
+
+cprintf("\r\nPress any key to clear screen");
+
+getch();
+
+clrscr();
+
+cprintf("The screen has been cleared!");
+
+getch();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: coreleft
+
+功 能: 返回未使用内存的大小
+
+用 法: unsigned coreleft(void);
+
+程序例:
+
+#include <stdio.h>
+
+#include <alloc.h>
+
+int main(void)
+
+{
+
+printf("The difference between the highest allocated block and\n");
+
+printf("the top of the heap is: %lu bytes\n", (unsigned long) coreleft());
+
+return 0;
+
+}
+
+
+
+函数名: cos
+
+功 能: 余弦函数
+
+用 法: double cos(double x);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+double result;
+
+double x = 0.5;
+
+result = cos(x);
+
+printf("The cosine of %lf is %lf\n", x, result);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: cosh
+
+功 能: 双曲余弦函数
+
+用 法: dluble cosh(double x);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+double result;
+
+double x = 0.5;
+
+result = cosh(x);
+
+printf("The hyperboic cosine of %lf is %lf\n", x, result);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: country
+
+功 能: 返回与国家有关的信息
+
+用 法: struct COUNTRY *country(int countrycode, struct country *country);
+
+程序例:
+
+#include <dos.h>
+
+#include <stdio.h>
+
+#define USA 0
+
+int main(void)
+
+{
+
+struct COUNTRY country_info;
+
+country(USA, &country_info);
+
+printf("The currency symbol for the USA is: %s\n",
+
+country_info.co_curr);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: cprintf
+
+功 能: 送格式化输出至屏幕
+
+用 法: int cprintf(const char *format[, argument, ...]);
+
+程序例:
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* clear the screen */
+
+clrscr();
+
+/* create a text window */
+
+window(10, 10, 80, 25);
+
+/* output some text in the window */
+
+cprintf("Hello world\r\n");
+
+/* wait for a key */
+
+getch();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: cputs
+
+功 能: 写字符到屏幕
+
+用 法: void cputs(const char *string);
+
+程序例:
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* clear the screen */
+
+clrscr();
+
+/* create a text window */
+
+window(10, 10, 80, 25);
+
+/* output some text in the window */
+
+cputs("This is within the window\r\n");
+
+/* wait for a key */
+
+getch();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: _creat creat
+
+功 能: 创建一个新文件或重写一个已存在的文件
+
+用 法: int creat (const char *filename, int permiss);
+
+程序例:
+
+#include <sys\stat.h>
+
+#include <string.h>
+
+#include <fcntl.h>
+
+#include <io.h>
+
+int main(void)
+
+{
+
+int handle;
+
+char buf[11] = "0123456789";
+
+/* change the default file mode from text to binary */
+
+_fmode = O_BINARY;
+
+/* create a binary file for reading and writing */
+
+handle = creat("DUMMY.FIL", S_IREAD | S_IWRITE);
+
+/* write 10 bytes to the file */
+
+write(handle, buf, strlen(buf));
+
+/* close the file */
+
+close(handle);
+
+return 0;
+
+}
+
+
+
+函数名: creatnew
+
+功 能: 创建一个新文件
+
+用 法: int creatnew(const char *filename, int attrib);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+#include <errno.h>
+
+#include <dos.h>
+
+#include <io.h>
+
+int main(void)
+
+{
+
+int handle;
+
+char buf[11] = "0123456789";
+
+/* attempt to create a file that doesn't already exist */
+
+handle = creatnew("DUMMY.FIL", 0);
+
+if (handle == -1)
+
+printf("DUMMY.FIL already exists.\n");
+
+else
+
+{
+
+printf("DUMMY.FIL successfully created.\n");
+
+write(handle, buf, strlen(buf));
+
+close(handle);
+
+}
+
+return 0;
+
+}
+
+
+
+
+
+函数名: creattemp
+
+功 能: 创建一个新文件或重写一个已存在的文件
+
+用 法: int creattemp(const char *filename, int attrib);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+#include <io.h>
+
+int main(void)
+
+{
+
+int handle;
+
+char pathname[128];
+
+strcpy(pathname, "\\");
+
+/* create a unique file in the root directory */
+
+handle = creattemp(pathname, 0);
+
+printf("%s was the unique file created.\n", pathname);
+
+close(handle);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: cscanf
+
+功 能: 从控制台执行格式化输入
+
+用 法: int cscanf(char *format[,argument, ...]);
+
+程序例:
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+char string[80];
+
+/* clear the screen */
+
+clrscr();
+
+/* Prompt the user for input */
+
+cprintf("Enter a string with no spaces:");
+
+/* read the input */
+
+cscanf("%s", string);
+
+/* display what was read */
+
+cprintf("\r\nThe string entered is: %s", string);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: ctime
+
+功 能: 把日期和时间转换为字符串
+
+用 法: char *ctime(const time_t *time);
+
+程序例:
+
+#include <stdio.h>
+
+#include <time.h>
+
+int main(void)
+
+{
+
+time_t t;
+
+time(&t);
+
+printf("Today's date and time: %s\n", ctime(&t));
+
+return 0;
+
+}
+
+
+
+
+
+函数名: ctrlbrk
+
+功 能: 设置Ctrl-Break处理程序
+
+用 法: void ctrlbrk(*fptr)(void);
+
+程序例:
+
+#include <stdio.h>
+
+#include <dos.h>
+
+#define ABORT 0
+
+int c_break(void)
+
+{
+
+printf("Control-Break pressed. Program aborting ...\n");
+
+return (ABORT);
+
+}
+
+int main(void)
+
+{
+
+ctrlbrk(c_break);
+
+for(;;)
+
+{
+
+printf("Looping... Press <Ctrl-Break> to quit:\n");
+
+}
+
+return 0;
+
+}
+
+
+
+
+
+函数名: abort
+
+功 能: 异常终止一个进程
+
+用 法: void abort(void);
+
+程序例:
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+int main(void)
+
+{
+
+printf("Calling abort()\n");
+
+abort();
+
+return 0; /* This is never reached */
+
+}
+
+
+
+
+
+函数名: abs
+
+功 能: 求整数的绝对值
+
+用 法: int abs(int i);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+int number = -1234;
+
+printf("number: %d absolute value: %d\n", number, abs(number));
+
+return 0;
+
+}
+
+
+
+
+
+函数名: absread, abswirte
+
+功 能: 绝对磁盘扇区读、写数据
+
+用 法: int absread(int drive, int nsects, int sectno, void *buffer);
+
+int abswrite(int drive, int nsects, in tsectno, void *buffer);
+
+程序例:
+
+/* absread example */
+
+#include <stdio.h>
+
+#include <conio.h>
+
+#include <process.h>
+
+#include <dos.h>
+
+int main(void)
+
+{
+
+int i, strt, ch_out, sector;
+
+char buf[512];
+
+printf("Insert a diskette into drive A and press any key\n");
+
+getch();
+
+sector = 0;
+
+if (absread(0, 1, sector, &buf) != 0)
+
+{
+
+perror("Disk problem");
+
+exit(1);
+
+}
+
+printf("Read OK\n");
+
+strt = 3;
+
+for (i=0; i<80; i++)
+
+{
+
+ch_out = buf[strt+i];
+
+putchar(ch_out);
+
+}
+
+printf("\n");
+
+return(0);
+
+}
+
+
+
+
+
+函数名: access
+
+功 能: 确定文件的访问权限
+
+用 法: int access(const char *filename, int amode);
+
+程序例:
+
+#include <stdio.h>
+
+#include <io.h>
+
+int file_exists(char *filename);
+
+int main(void)
+
+{
+
+printf("Does NOTEXIST.FIL exist: %s\n",
+
+file_exists("NOTEXISTS.FIL") ? "YES" : "NO");
+
+return 0;
+
+}
+
+int file_exists(char *filename)
+
+{
+
+return (access(filename, 0) == 0);
+
+}
+
+
+
+函数名: acos
+
+功 能: 反余弦函数
+
+用 法: double acos(double x);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+double result;
+
+double x = 0.5;
+
+result = acos(x);
+
+printf("The arc cosine of %lf is %lf\n", x, result);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: allocmem
+
+功 能: 分配DOS存储段
+
+用 法: int allocmem(unsigned size, unsigned *seg);
+
+程序例:
+
+#include <dos.h>
+
+#include <alloc.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+unsigned int size, segp;
+
+int stat;
+
+size = 64; /* (64 x 16) = 1024 bytes */
+
+stat = allocmem(size, &segp);
+
+if (stat == -1)
+
+printf("Allocated memory at segment: %x\n", segp);
+
+else
+
+printf("Failed: maximum number of paragraphs available is %u\n",
+
+stat);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: arc
+
+功 能: 画一弧线
+
+用 法: void far arc(int x, int y, int stangle, int endangle, int radius);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+int midx, midy;
+
+int stangle = 45, endangle = 135;
+
+int radius = 100;
+
+/* initialize graphics and local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult(); /* an error occurred */
+
+if (errorcode != grOk)
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+midx = getmaxx() / 2;
+
+midy = getmaxy() / 2;
+
+setcolor(getmaxcolor());
+
+/* draw arc */
+
+arc(midx, midy, stangle, endangle, radius);
+
+/* clean up */
+
+getch();
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: asctime
+
+功 能: 转换日期和时间为ASCII码
+
+用 法: char *asctime(const struct tm *tblock);
+
+程序例:
+
+#include <stdio.h>
+
+#include <string.h>
+
+#include <time.h>
+
+int main(void)
+
+{
+
+struct tm t;
+
+char str[80];
+
+/* sample loading of tm structure */
+
+t.tm_sec = 1; /* Seconds */
+
+t.tm_min = 30; /* Minutes */
+
+t.tm_hour = 9; /* Hour */
+
+t.tm_mday = 22; /* Day of the Month */
+
+t.tm_mon = 11; /* Month */
+
+t.tm_year = 56; /* Year - does not include century */
+
+t.tm_wday = 4; /* Day of the week */
+
+t.tm_yday = 0; /* Does not show in asctime */
+
+t.tm_isdst = 0; /* Is Daylight SavTime; does not show in asctime */
+
+/* converts structure to null terminated
+
+string */
+
+strcpy(str, asctime(&t));
+
+printf("%s\n", str);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: asin
+
+功 能: 反正弦函数
+
+用 法: double asin(double x);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+double result;
+
+double x = 0.5;
+
+result = asin(x);
+
+printf("The arc sin of %lf is %lf\n", x, result);
+
+return(0);
+
+}
+
+
+
+
+
+函数名: assert
+
+功 能: 测试一个条件并可能使程序终止
+
+用 法: void assert(int test);
+
+程序例:
+
+#include <assert.h>
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+struct ITEM {
+
+int key;
+
+int value;
+
+};
+
+/* add item to list, make sure list is not null */
+
+void additem(struct ITEM *itemptr) {
+
+assert(itemptr != NULL);
+
+/* add item to list */
+
+}
+
+int main(void)
+
+{
+
+additem(NULL);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: atan
+
+功 能: 反正切函数
+
+用 法: double atan(double x);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+double result;
+
+double x = 0.5;
+
+result = atan(x);
+
+printf("The arc tangent of %lf is %lf\n", x, result);
+
+return(0);
+
+}
+
+
+
+
+
+函数名: atan2
+
+功 能: 计算Y/X的反正切值
+
+用 法: double atan2(double y, double x);
+
+程序例:
+
+#include <stdio.h>
+
+#include <math.h>
+
+int main(void)
+
+{
+
+double result;
+
+double x = 90.0, y = 45.0;
+
+result = atan2(y, x);
+
+printf("The arc tangent ratio of %lf is %lf\n", (y / x), result);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: atexit
+
+功 能: 注册终止函数
+
+用 法: int atexit(atexit_t func);
+
+程序例:
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+void exit_fn1(void)
+
+{
+
+printf("Exit function #1 called\n");
+
+}
+
+void exit_fn2(void)
+
+{
+
+printf("Exit function #2 called\n");
+
+}
+
+int main(void)
+
+{
+
+/* post exit function #1 */
+
+atexit(exit_fn1);
+
+/* post exit function #2 */
+
+atexit(exit_fn2);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: atof
+
+功 能: 把字符串转换成浮点数
+
+用 法: double atof(const char *nptr);
+
+程序例:
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+float f;
+
+char *str = "12345.67";
+
+f = atof(str);
+
+printf("string = %s float = %f\n", str, f);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: atoi
+
+功 能: 把字符串转换成长整型数
+
+用 法: int atoi(const char *nptr);
+
+程序例:
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+int n;
+
+char *str = "12345.67";
+
+n = atoi(str);
+
+printf("string = %s integer = %d\n", str, n);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: atol
+
+功 能: 把字符串转换成长整型数
+
+用 法: long atol(const char *nptr);
+
+程序例:
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+long l;
+
+char *str = "98765432";
+
+l = atol(lstr);
+
+printf("string = %s integer = %ld\n", str, l);
+
+return(0);
+
+}
+
+
+
+
+
+函数名: bar
+
+功 能: 画一个二维条形图
+
+用 法: void far bar(int left, int top, int right, int bottom);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+int midx, midy, i;
+
+/* initialize graphics and local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+midx = getmaxx() / 2;
+
+midy = getmaxy() / 2;
+
+/* loop through the fill patterns */
+
+for (i=SOLID_FILL; i<USER_FILL; i++)
+
+{
+
+/* set the fill style */
+
+setfillstyle(i, getmaxcolor());
+
+/* draw the bar */
+
+bar(midx-50, midy-50, midx+50,
+
+midy+50);
+
+getch();
+
+}
+
+/* clean up */
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: bar3d
+
+功 能: 画一个三维条形图
+
+用 法: void far bar3d(int left, int top, int right, int bottom,
+
+int depth, int topflag);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+int midx, midy, i;
+
+/* initialize graphics, local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with error code */
+
+}
+
+midx = getmaxx() / 2;
+
+midy = getmaxy() / 2;
+
+/* loop through the fill patterns */
+
+for (i=EMPTY_FILL; i<USER_FILL; i++)
+
+{
+
+/* set the fill style */
+
+setfillstyle(i, getmaxcolor());
+
+/* draw the 3-d bar */
+
+bar3d(midx-50, midy-50, midx+50, midy+50, 10, 1);
+
+getch();
+
+}
+
+/* clean up */
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: bdos
+
+功 能: DOS系统调用
+
+用 法: int bdos(int dosfun, unsigned dosdx, unsigned dosal);
+
+程序例:
+
+#include <stdio.h>
+
+#include <dos.h>
+
+/* Get current drive as 'A', 'B', ... */
+
+char current_drive(void)
+
+{
+
+char curdrive;
+
+/* Get current disk as 0, 1, ... */
+
+curdrive = bdos(0x19, 0, 0);
+
+return('A' + curdrive);
+
+}
+
+int main(void)
+
+{
+
+printf("The current drive is %c:\n", current_drive());
+
+return 0;
+
+}
+
+
+
+
+
+函数名: bdosptr
+
+功 能: DOS系统调用
+
+用 法: int bdosptr(int dosfun, void *argument, unsigned dosal);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+#include <dir.h>
+
+#include <dos.h>
+
+#include <errno.h>
+
+#include <stdlib.h>
+
+#define BUFLEN 80
+
+int main(void)
+
+{
+
+char buffer[BUFLEN];
+
+int test;
+
+printf("Enter full pathname of a directory\n");
+
+gets(buffer);
+
+test = bdosptr(0x3B,buffer,0);
+
+if(test)
+
+{
+
+printf("DOS error message: %d\n", errno);
+
+/* See errno.h for error listings */
+
+exit (1);
+
+}
+
+getcwd(buffer, BUFLEN);
+
+printf("The current directory is: %s\n", buffer);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: bioscom
+
+功 能: 串行I/O通信
+
+用 法: int bioscom(int cmd, char abyte, int port);
+
+程序例:
+
+#include <bios.h>
+
+#include <conio.h>
+
+#define COM1 0
+
+#define DATA_READY 0x100
+
+#define TRUE 1
+
+#define FALSE 0
+
+#define SETTINGS ( 0x80 | 0x02 | 0x00 | 0x00)
+
+int main(void)
+
+{
+
+int in, out, status, DONE = FALSE;
+
+bioscom(0, SETTINGS, COM1);
+
+cprintf("... BIOSCOM [ESC] to exit ...\n");
+
+while (!DONE)
+
+{
+
+status = bioscom(3, 0, COM1);
+
+if (status & DATA_READY)
+
+if ((out = bioscom(2, 0, COM1) & 0x7F) != 0)
+
+putch(out);
+
+if (kbhit())
+
+{
+
+if ((in = getch()) == '\x1B')
+
+DONE = TRUE;
+
+bioscom(1, in, COM1);
+
+}
+
+}
+
+return 0;
+
+}
+
+
+
+
+
+函数名: biosdisk
+
+功 能: 软硬盘I/O
+
+用 法: int biosdisk(int cmd, int drive, int head, int track, int sector
+
+int nsects, void *buffer);
+
+程序例:
+
+#include <bios.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+int result;
+
+char buffer[512];
+
+printf("Testing to see if drive a: is ready\n");
+
+result = biosdisk(4,0,0,0,0,1,buffer);
+
+result &= 0x02;
+
+(result) ? (printf("Drive A: Ready\n")) :
+
+(printf("Drive A: Not Ready\n"));
+
+return 0;
+
+}
+
+
+
+
+
+函数名: biosequip
+
+功 能: 检查设备
+
+用 法: int biosequip(void);
+
+程序例:
+
+#include <bios.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+int result;
+
+char buffer[512];
+
+printf("Testing to see if drive a: is ready\n");
+
+result = biosdisk(4,0,0,0,0,1,buffer);
+
+result &= 0x02;
+
+(result) ? (printf("Drive A: Ready\n")) :
+
+(printf("Drive A: Not Ready\n"));
+
+return 0;
+
+}
+
+
+
+
+
+函数名: bioskey
+
+功 能: 直接使用BIOS服务的键盘接口
+
+用 法: int bioskey(int cmd);
+
+程序例:
+
+#include <stdio.h>
+
+#include <bios.h>
+
+#include <ctype.h>
+
+#define RIGHT 0x01
+
+#define LEFT 0x02
+
+#define CTRL 0x04
+
+#define ALT 0x08
+
+int main(void)
+
+{
+
+int key, modifiers;
+
+/* function 1 returns 0 until a key is pressed */
+
+while (bioskey(1) == 0);
+
+/* function 0 returns the key that is waiting */
+
+key = bioskey(0);
+
+/* use function 2 to determine if shift keys were used */
+
+modifiers = bioskey(2);
+
+if (modifiers)
+
+{
+
+printf("[");
+
+if (modifiers & RIGHT) printf("RIGHT");
+
+if (modifiers & LEFT) printf("LEFT");
+
+if (modifiers & CTRL) printf("CTRL");
+
+if (modifiers & ALT) printf("ALT");
+
+printf("]");
+
+}
+
+/* print out the character read */
+
+if (isalnum(key & 0xFF))
+
+printf("'%c'\n", key);
+
+else
+
+printf("%#02x\n", key);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: biosmemory
+
+功 能: 返回存储块大小
+
+用 法:int biosmemory(void);
+
+程序例:
+
+#include <stdio.h>
+
+#include <bios.h>
+
+int main(void)
+
+{
+
+int memory_size;
+
+memory_size = biosmemory(); /* returns value up to 640K */
+
+printf("RAM size = %dK\n",memory_size);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: biosprint
+
+功 能: 直接使用BIOS服务的打印机I/O
+
+用 法: int biosprint(int cmd, int byte, int port);
+
+程序例:
+
+#include <stdio.h>
+
+#include <conio.h>
+
+#include <bios.h>
+
+int main(void)
+
+{
+
+#define STATUS 2 /* printer status command */
+
+#define PORTNUM 0 /* port number for LPT1 */
+
+int status, abyte=0;
+
+printf("Please turn off your printer. Press any key to continue\n");
+
+getch();
+
+status = biosprint(STATUS, abyte, PORTNUM);
+
+if (status & 0x01)
+
+printf("Device time out.\n");
+
+if (status & 0x08)
+
+printf("I/O error.\n");
+
+if (status & 0x10)
+
+printf("Selected.\n");
+
+if (status & 0x20)
+
+printf("Out of paper.\n");
+
+if (status & 0x40)
+
+printf("Acknowledge.\n");
+
+if (status & 0x80)
+
+printf("Not busy.\n");
+
+return 0;
+
+}
+
+
+
+
+
+函数名: biostime
+
+功 能: 读取或设置BIOS时间
+
+用 法: long biostime(int cmd, long newtime);
+
+程序例:
+
+#include <stdio.h>
+
+#include <bios.h>
+
+#include <time.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+long bios_time;
+
+clrscr();
+
+cprintf("The number of clock ticks since midnight is:\r\n");
+
+cprintf("The number of seconds since midnight is:\r\n");
+
+cprintf("The number of minutes since midnight is:\r\n");
+
+cprintf("The number of hours since midnight is:\r\n");
+
+cprintf("\r\nPress any key to quit:");
+
+while(!kbhit())
+
+{
+
+bios_time = biostime(0, 0L);
+
+gotoxy(50, 1);
+
+cprintf("%lu", bios_time);
+
+gotoxy(50, 2);
+
+cprintf("%.4f", bios_time / CLK_TCK);
+
+gotoxy(50, 3);
+
+cprintf("%.4f", bios_time / CLK_TCK / 60);
+
+gotoxy(50, 4);
+
+cprintf("%.4f", bios_time / CLK_TCK / 3600);
+
+}
+
+return 0;
+
+}
+
+
+
+
+
+函数名: brk
+
+功 能: 改变数据段空间分配
+
+用 法: int brk(void *endds);
+
+程序例:
+
+#include <stdio.h>
+
+#include <alloc.h>
+
+int main(void)
+
+{
+
+char *ptr;
+
+printf("Changing allocation with brk()\n");
+
+ptr = malloc(1);
+
+printf("Before brk() call: %lu bytes free\n", coreleft());
+
+brk(ptr+1000);
+
+printf(" After brk() call: %lu bytes free\n", coreleft());
+
+return 0;
+
+}
+
+
+
+
+
+函数名: bsearch
+
+功 能: 二分法搜索
+
+用 法: void *bsearch(const void *key, const void *base, size_t *nelem,
+
+size_t width, int(*fcmp)(const void *, const *));
+
+程序例:
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#define NELEMS(arr) (sizeof(arr) / sizeof(arr[0]))
+
+int numarray[] = {123, 145, 512, 627, 800, 933};
+
+int numeric (const int *p1, const int *p2)
+
+{
+
+return(*p1 - *p2);
+
+}
+
+int lookup(int key)
+
+{
+
+int *itemptr;
+
+/* The cast of (int(*)(const void *,const void*))
+
+is needed to avoid a type mismatch error at
+
+compile time */
+
+itemptr = bsearch (&key, numarray, NELEMS(numarray),
+
+sizeof(int), (int(*)(const void *,const void *))numeric);
+
+return (itemptr != NULL);
+
+}
+
+int main(void)
+
+{
+
+if (lookup(512))
+
+printf("512 is in the table.\n");
+
+else
+
+printf("512 isn't in the table.\n");
+
+return 0;
+
+}
+
+
+
+
+
+main()主函数 每一C 程序都必须有一main()函数, 可以根据自己的爱好把它放在程序的某
+
+个地方。有些程序员把它放在最前面, 而另一些程序员把它放在最后面, 无论放
+
+在哪个地方, 以下几点说明都是适合的。
+
+1. main() 参数
+
+在Turbo C2.0启动过程中, 传递main()函数三个参数: argc, argv和env。
+
+* argc: 整数, 为传给main()的命令行参数个数。
+
+* argv: 字符串数组。
+
+在DOS 3.X 版本中, argv[0] 为程序运行的全路径名; 对DOS 3.0
+
+以下的版本, argv[0]为空串("") 。
+
+argv[1] 为在DOS命令行中执行程序名后的第一个字符串;
+
+argv[2] 为执行程序名后的第二个字符串;
+
+...
+
+argv[argc]为NULL。
+
+*env: 安符串数组。env[] 的每一个元素都包含ENVVAR=value形式的字符
+
+串。其中ENVVAR为环境变量如PATH或87。value 为ENVVAR的对应值如C:\DOS, C:
+
+\TURBOC(对于PATH) 或YES(对于87)。
+
+Turbo C2.0启动时总是把这三个参数传递给main()函数, 可以在用户程序中
+
+说明(或不说明)它们, 如果说明了部分(或全部)参数, 它们就成为main()子程序
+
+的局部变量。
+
+请注意: 一旦想说明这些参数, 则必须按argc, argv, env 的顺序, 如以下
+
+的例子:
+
+main()
+
+main(int argc)
+
+main(int argc, char *argv[])
+
+main(int argc, char *argv[], char *env[])
+
+其中第二种情况是合法的, 但不常见, 因为在程序中很少有只用argc, 而不
+
+用argv[]的情况。
+
+以下提供一样例程序EXAMPLE.EXE, 演示如何在main()函数中使用三个参数:
+
+/*program name EXAMPLE.EXE*/
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+main(int argc, char *argv[], char *env[])
+
+{
+
+int i;
+
+printf("These are the %d command- line arguments passed to
+
+main:\n\n", argc);
+
+for(i=0; i<=argc; i++)
+
+printf("argv[%d]:%s\n", i, argv[i]);
+
+printf("\nThe environment string(s)on this system are:\n\n");
+
+for(i=0; env[i]!=NULL; i++)
+
+printf(" env[%d]:%s\n", i, env[i]);
+
+}
+
+如果在DOS 提示符下, 按以下方式运行EXAMPLE.EXE:
+
+C:\example first_argument "argument with blanks" 3 4 "last but
+
+one" stop!
+
+注意: 可以用双引号括起内含空格的参数, 如本例中的: " argument
+
+with blanks"和"Last but one")。
+
+结果是这样的:
+
+The value of argc is 7
+
+These are the 7 command-linearguments passed to main:
+
+argv[0]:C:\TURBO\EXAMPLE.EXE
+
+argv[1]:first_argument
+
+argv[2]:argument with blanks
+
+argv[3]:3
+
+argv[4]:4
+
+argv[5]:last but one
+
+argv[6]:stop!
+
+argv[7]:(NULL)
+
+The environment string(s) on this system are:
+
+env[0]: COMSPEC=C:\COMMAND.COM
+
+env[1]: PROMPT=$P$G /*视具体设置而定*/
+
+env[2]: PATH=C:\DOS;C:\TC /*视具体设置而定*/
+
+
+
+应该提醒的是: 传送main() 函数的命令行参数的最大长度为128 个字符 (包
+
+括参数间的空格), 这是由DOS 限制的。
+
+
+
+函数名: matherr
+
+功 能: 用户可修改的数学错误处理程序
+
+用 法: int matherr(struct exception *e);
+
+程序例:
+
+/* This is a user-defined matherr function that prevents
+
+any error messages from being printed. */
+
+#include<math.h>
+
+int matherr(struct exception *a)
+
+{
+
+return 1;
+
+}
+
+
+
+
+
+函数名: memccpy
+
+功 能: 从源source中拷贝n个字节到目标destin中
+
+用 法: void *memccpy(void *destin, void *source, unsigned char ch,
+
+unsigned n);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+char *src = "This is the source string";
+
+char dest[50];
+
+char *ptr;
+
+ptr = memccpy(dest, src, 'c', strlen(src));
+
+if (ptr)
+
+{
+
+*ptr = '\0';
+
+printf("The character was found: %s\n", dest);
+
+}
+
+else
+
+printf("The character wasn't found\n");
+
+return 0;
+
+}
+
+
+
+
+
+函数名: malloc
+
+功 能: 内存分配函数
+
+用 法: void *malloc(unsigned size);
+
+程序例:
+
+#include <stdio.h>
+
+#include <string.h>
+
+#include <alloc.h>
+
+#include <process.h>
+
+int main(void)
+
+{
+
+char *str;
+
+/* allocate memory for string */
+
+/* This will generate an error when compiling */
+
+/* with C++, use the new operator instead. */
+
+if ((str = malloc(10)) == NULL)
+
+{
+
+printf("Not enough memory to allocate buffer\n");
+
+exit(1); /* terminate program if out of memory */
+
+}
+
+/* copy "Hello" into string */
+
+strcpy(str, "Hello");
+
+/* display string */
+
+printf("String is %s\n", str);
+
+/* free memory */
+
+free(str);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: memchr
+
+功 能: 在数组的前n个字节中搜索字符
+
+用 法: void *memchr(void *s, char ch, unsigned n);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+char str[17];
+
+char *ptr;
+
+strcpy(str, "This is a string");
+
+ptr = memchr(str, 'r', strlen(str));
+
+if (ptr)
+
+printf("The character 'r' is at position: %d\n", ptr - str);
+
+else
+
+printf("The character was not found\n");
+
+return 0;
+
+}
+
+
+
+函数名: memcpy
+
+功 能: 从源source中拷贝n个字节到目标destin中
+
+用 法: void *memcpy(void *destin, void *source, unsigned n);
+
+程序例:
+
+#include <stdio.h>
+
+#include <string.h>
+
+int main(void)
+
+{
+
+char src[] = "******************************";
+
+char dest[] = "abcdefghijlkmnopqrstuvwxyz0123456709";
+
+char *ptr;
+
+printf("destination before memcpy: %s\n", dest);
+
+ptr = memcpy(dest, src, strlen(src));
+
+if (ptr)
+
+printf("destination after memcpy: %s\n", dest);
+
+else
+
+printf("memcpy failed\n");
+
+return 0;
+
+}
+
+
+
+
+
+函数名: memicmp
+
+功 能: 比较两个串s1和s2的前n个字节, 忽略大小写
+
+用 法: int memicmp(void *s1, void *s2, unsigned n);
+
+程序例:
+
+#include <stdio.h>
+
+#include <string.h>
+
+int main(void)
+
+{
+
+char *buf1 = "ABCDE123";
+
+char *buf2 = "abcde456";
+
+int stat;
+
+stat = memicmp(buf1, buf2, 5);
+
+printf("The strings to position 5 are ");
+
+if (stat)
+
+printf("not ");
+
+printf("the same\n");
+
+return 0;
+
+}
+
+
+
+
+
+函数名: memmove
+
+功 能: 移动一块字节
+
+用 法: void *memmove(void *destin, void *source, unsigned n);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+char *dest = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+char *src = "******************************";
+
+printf("destination prior to memmove: %s\n", dest);
+
+memmove(dest, src, 26);
+
+printf("destination after memmove: %s\n", dest);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: memset
+
+功 能: 设置s中的所有字节为ch, s数组的大小由n给定
+
+用 法: void *memset(void *s, char ch, unsigned n);
+
+程序例:
+
+#include <string.h>
+
+#include <stdio.h>
+
+#include <mem.h>
+
+int main(void)
+
+{
+
+char buffer[] = "Hello world\n";
+
+printf("Buffer before memset: %s\n", buffer);
+
+memset(buffer, '*', strlen(buffer) - 1);
+
+printf("Buffer after memset: %s\n", buffer);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: mkdir
+
+功 能: 建立一个目录
+
+用 法: int mkdir(char *pathname);
+
+程序例:
+
+#include <stdio.h>
+
+#include <conio.h>
+
+#include <process.h>
+
+#include <dir.h>
+
+int main(void)
+
+{
+
+int status;
+
+clrscr();
+
+status = mkdir("asdfjklm");
+
+(!status) ? (printf("Directory created\n")) :
+
+(printf("Unable to create directory\n"));
+
+getch();
+
+system("dir");
+
+getch();
+
+status = rmdir("asdfjklm");
+
+(!status) ? (printf("Directory deleted\n")) :
+
+(perror("Unable to delete directory"));
+
+return 0;
+
+}
+
+
+
+
+
+函数名: mktemp
+
+功 能: 建立唯一的文件名
+
+用 法: char *mktemp(char *template);
+
+程序例:
+
+#include <dir.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+/* fname defines the template for the
+
+temporary file. */
+
+char *fname = "TXXXXXX", *ptr;
+
+ptr = mktemp(fname);
+
+printf("%s\n",ptr);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: MK_FP
+
+功 能: 设置一个远指针
+
+用 法: void far *MK_FP(unsigned seg, unsigned off);
+
+程序例:
+
+#include <dos.h>
+
+#include <graphics.h>
+
+int main(void)
+
+{
+
+int gd, gm, i;
+
+unsigned int far *screen;
+
+detectgraph(&gd, &gm);
+
+if (gd == HERCMONO)
+
+screen = MK_FP(0xB000, 0);
+
+else
+
+screen = MK_FP(0xB800, 0);
+
+for (i=0; i<26; i++)
+
+screen[i] = 0x0700 + ('a' + i);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: modf
+
+功 能: 把数分为指数和尾数
+
+用 法: double modf(double value, double *iptr);
+
+程序例:
+
+#include <math.h>
+
+#include <stdio.h>
+
+int main(void)
+
+{
+
+double fraction, integer;
+
+double number = 100000.567;
+
+fraction = modf(number, &integer);
+
+printf("The whole and fractional parts of %lf are %lf and %lf\n",
+
+number, integer, fraction);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: movedata
+
+功 能: 拷贝字节
+
+用 法: void movedata(int segsrc, int offsrc, int segdest,
+
+int offdest, unsigned numbytes);
+
+程序例:
+
+#include <mem.h>
+
+#define MONO_BASE 0xB000
+
+/* saves the contents of the monochrome screen in buffer */
+
+void save_mono_screen(char near *buffer)
+
+{
+
+movedata(MONO_BASE, 0, _DS, (unsigned)buffer, 80*25*2);
+
+}
+
+int main(void)
+
+{
+
+char buf[80*25*2];
+
+save_mono_screen(buf);
+
+}
+
+
+
+
+
+函数名: moverel
+
+功 能: 将当前位置(CP)移动一相对距离
+
+用 法: void far moverel(int dx, int dy);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+char msg[80];
+
+/* initialize graphics and local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+/* move the C.P. to location (20, 30) */
+
+moveto(20, 30);
+
+/* plot a pixel at the C.P. */
+
+putpixel(getx(), gety(), getmaxcolor());
+
+/* create and output a message at (20, 30) */
+
+sprintf(msg, " (%d, %d)", getx(), gety());
+
+outtextxy(20, 30, msg);
+
+/* move to a point a relative distance */
+
+/* away from the current value of C.P. */
+
+moverel(100, 100);
+
+/* plot a pixel at the C.P. */
+
+putpixel(getx(), gety(), getmaxcolor());
+
+/* create and output a message at C.P. */
+
+sprintf(msg, " (%d, %d)", getx(), gety());
+
+outtext(msg);
+
+/* clean up */
+
+getch();
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: movetext
+
+功 能: 将屏幕文本从一个矩形区域拷贝到另一个矩形区域
+
+用 法: int movetext(int left, int top, int right, int bottom,
+
+int newleft, int newtop);
+
+程序例:
+
+#include <conio.h>
+
+#include <string.h>
+
+int main(void)
+
+{
+
+char *str = "This is a test string";
+
+clrscr();
+
+cputs(str);
+
+getch();
+
+movetext(1, 1, strlen(str), 2, 10, 10);
+
+getch();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: moveto
+
+功 能: 将CP移到(x, y)
+
+用 法: void far moveto(int x, int y);
+
+程序例:
+
+#include <graphics.h>
+
+#include <stdlib.h>
+
+#include <stdio.h>
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+/* request auto detection */
+
+int gdriver = DETECT, gmode, errorcode;
+
+char msg[80];
+
+/* initialize graphics and local variables */
+
+initgraph(&gdriver, &gmode, "");
+
+/* read result of initialization */
+
+errorcode = graphresult();
+
+if (errorcode != grOk) /* an error occurred */
+
+{
+
+printf("Graphics error: %s\n", grapherrormsg(errorcode));
+
+printf("Press any key to halt:");
+
+getch();
+
+exit(1); /* terminate with an error code */
+
+}
+
+/* move the C.P. to location (20, 30) */
+
+moveto(20, 30);
+
+/* plot a pixel at the C.P. */
+
+putpixel(getx(), gety(), getmaxcolor());
+
+/* create and output a message at (20, 30) */
+
+sprintf(msg, " (%d, %d)", getx(), gety());
+
+outtextxy(20, 30, msg);
+
+/* move to (100, 100) */
+
+moveto(100, 100);
+
+/* plot a pixel at the C.P. */
+
+putpixel(getx(), gety(), getmaxcolor());
+
+/* create and output a message at C.P. */
+
+sprintf(msg, " (%d, %d)", getx(), gety());
+
+outtext(msg);
+
+/* clean up */
+
+getch();
+
+closegraph();
+
+return 0;
+
+}
+
+
+
+
+
+函数名: movemem
+
+功 能: 移动一块字节
+
+用 法: void movemem(void *source, void *destin, unsigned len);
+
+程序例:
+
+#include <mem.h>
+
+#include <alloc.h>
+
+#include <stdio.h>
+
+#include <string.h>
+
+int main(void)
+
+{
+
+char *source = "Borland International";
+
+char *destination;
+
+int length;
+
+length = strlen(source);
+
+destination = malloc(length + 1);
+
+movmem(source,destination,length);
+
+printf("%s\n",destination);
+
+return 0;
+
+}
+
+
+
+
+
+函数名: normvideo
+
+功 能: 选择正常亮度字符
+
+用 法: void normvideo(void);
+
+程序例:
+
+#include <conio.h>
+
+int main(void)
+
+{
+
+normvideo();
+
+cprintf("NORMAL Intensity Text\r\n");
+
+return 0;
+
+}
+
+
+
+
+
+函数名: nosound
+
+功 能: 关闭PC扬声器
+
+用 法: void nosound(void);
+
+程序例:
+
+/* Emits a 7-Hz tone for 10 seconds.
+
+True story: 7 Hz is the resonant frequency of a chicken's skull cavity.
+
+This was determined empirically in Australia, where a new factory
+
+generating 7-Hz tones was located too close to a chicken ranch:
+
+When the factory started up, all the chickens died.
+
+Your PC may not be able to emit a 7-Hz tone.
+
+*/
+
+int main(void)
+
+{
+
+sound(7);
+
+delay(10000);
+
+nosound();
+
+}
+
+
+
+
+

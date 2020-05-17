@@ -1,0 +1,5722 @@
+Knocker
+
+2004.7.7 版本
+
+
+
+0.5
+
+
+
+
+
+字符串函数
+
+bcmp
+
+bcopy
+
+bzero
+
+memccpy
+
+memchr
+
+memcmp
+
+memcpy
+
+memicmp
+
+memmove
+
+memset
+
+movmem
+
+setmem
+
+stpcpy
+
+strcat
+
+strchr
+
+strcmp
+
+strcmpi
+
+strcpy
+
+strcspn
+
+strdup
+
+stricmp
+
+strlen
+
+strlwr
+
+strncat
+
+strncmp
+
+strncmpi
+
+strncpy
+
+strnicmp
+
+strpbrk
+
+strrev
+
+strset
+
+strstr
+
+strtok
+
+strupr
+
+
+
+
+
+数学函数
+
+abs
+
+acos
+
+asin
+
+atan
+
+atan2
+
+ceil
+
+cos
+
+cosh
+
+exp
+
+fabs
+
+floor
+
+fmod
+
+frexp
+
+hypot
+
+ldexp
+
+log
+
+log10
+
+modf
+
+pow
+
+pow10
+
+sin
+
+sinh
+
+sqrt
+
+tan
+
+tanh
+
+
+
+
+
+输入输出函数
+
+getchar
+
+kbhit
+
+printf
+
+putchar
+
+
+
+
+
+系统函数
+
+ClearScreen
+
+DispBCD
+
+SetScrollBar
+
+TextOut
+
+UpdateLCD
+
+bell
+
+block
+
+clrscr
+
+cursor
+
+delay
+
+get_chi_font
+
+get_eng_font
+
+getkey
+
+getpixel
+
+gotoxy
+
+line
+
+move
+
+noidle
+
+outtextxy
+
+putpixel
+
+pyfc
+
+rectangle
+
+sleep
+
+textmode
+
+time
+
+write_chi_font
+
+write_eng_font
+
+
+
+
+
+系统函数
+
+exit
+
+itoa
+
+
+
+
+
+字符函数
+
+isalnum
+
+isalpha
+
+iscntrl
+
+isdigit
+
+islower
+
+isascii
+
+isgraph
+
+isprint
+
+ispunct
+
+isspace
+
+isupper
+
+isxdigit
+
+toascii
+
+tolower
+
+toupper
+
+
+
+
+
+内存管理函数
+
+calloc
+
+free
+
+malloc
+
+realloc
+
+
+
+
+
+原型：extern int iscntrl(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为控制字符
+
+
+
+说明：当c在0x00-0x1F之间或等于0x7F(DEL)时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// iscntrl.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%x:%s\n",c,iscntrl(c)?"yes":"no"); c=0x0d;
+
+printf("%x:%s\n",c,iscntrl(c)?"yes":"no"); c=0x7f;
+
+printf("%x:%s\n",c,iscntrl(c)?"yes":"no"); getchar(); return 0; }
+
+
+
+相关函数：<a href="isalnum.html">isalnum</a>,<a href="isalpha.html">isalpha</a>,<a href="isdigit.html">isdigit</a>,<a href="isxdigit.html">isxdigit</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href="ispunct.html">ispunct</a>,<a href='isspace.html"'>isspace</a>
+
+
+
+
+
+原型：extern int isalnum(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为字母或数字
+
+
+
+说明：当c为数字0-9或字母a-z及A-Z时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isalnum.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,isalnum(c)?"yes":"no"); c='7';
+
+printf("%c:%s\n",c,isalnum(c)?"yes":"no"); c='@';
+
+printf("%c:%s\n",c,isalnum(c)?"yes":"no"); getchar(); return 0; }
+
+
+
+相关函数：<a href="isalpha.html">isalpha</a>,<a href="isdigit.html">isdigit</a>,<a href="isxdigit.html">isxdigit</a>,<a href="iscntrl.html">iscntrl</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href="ispunct.html">ispunct</a>,<a href="isspace.html">isspace</a>
+
+
+
+
+
+原型：extern int isalpha(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为英文字母
+
+
+
+说明：当c为英文字母a-z或A-Z时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isalpha.c
+
+#include <syslib.h> #include <ctype.h> #include <stdio.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen printf("Press a key"); for(;;)
+
+{
+
+c=getchar(); clrscr(); printf("%c: %s letter",c,isalpha(c)?"is":"not"); }
+
+return 0;	// just to avoid warnings by compiler }
+
+
+
+相关函数：<a href="isalnum.html">isalnum</a>,<a href="isdigit.html">isdigit</a>,<a href="isxdigit.html">isxdigit</a>,<a href="iscntrl.html">iscntrl</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href="ispunct.html">ispunct</a>,<a href='isspace.html"'>isspace</a>
+
+
+
+
+
+原型：extern int isascii(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为ascii码
+
+
+
+说明：当c为ascii码时，返回非零值，否则返回零。ascii码指0x00-0x7F之间的字符
+
+
+
+举例：
+
+
+
+// isascii.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+char s[]="文曲星-BJGGV"; int i=12; // length of string s
+
+clrscr(); // clear screen textmode(0xE0); // make sure LCD mode is 3 big line printf("%s\n",s); for(i=0;i<12;i++) {
+
+if(isascii(s[i])) putchar('^'); else putchar('.'); }
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern int isblank(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为TAB或空格
+
+
+
+说明：当c为TAB或空格时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isalnum.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,isalnum(c)?"yes":"no"); c='7';
+
+printf("%c:%s\n",c,isalnum(c)?"yes":"no"); c='@';
+
+printf("%c:%s\n",c,isalnum(c)?"yes":"no"); }
+
+
+
+相关函数：<a href="isalpha.html">isalnum</a>,<a href="isalpha.html">isalpha</a>,<a href="iscntrl.html">iscntrl</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href="ispunct.html">ispunct</a>,<a href='isspace.html"'>isspace</a>
+
+
+
+
+
+原型：extern int isdigit(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为数字
+
+
+
+说明：当c为数字0-9时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isdigit.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,isdigit(c)?"yes":"no"); c='9';
+
+printf("%c:%s\n",c,isdigit(c)?"yes":"no"); c='*';
+
+printf("%c:%s\n",c,isdigit(c)?"yes":"no"); getchar(); return 0; }
+
+
+
+相关函数：<a href="isalnum.html">isalnum</a>,<a href="isalpha.html">isalpha</a>,<a href="isxdigit.html">isxdigit</a>,<a href="iscntrl.html">iscntrl</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href="ispunct.html">ispunct</a>,<a href='isspace.html"'>isspace</a>
+
+
+
+
+
+原型：extern int isgraph(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为除空格外的可打印字符
+
+
+
+说明：当c为可打印字符（0x21-0x7e）时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isgraph.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,isgraph(c)?"yes":"no"); c=' '; // 0x20
+
+printf("%c:%s\n",c,isgraph(c)?"yes":"no"); c=0x7f;
+
+printf("%c:%s\n",c,isgraph(c)?"yes":"no");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="isprint.html">isprint</a>
+
+
+
+
+
+原型：extern int islower(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为小写英文字母
+
+
+
+说明：当c为小写英文字母(a-z)时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// islower.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,islower(c)?"yes":"no"); c='A';
+
+printf("%c:%s\n",c,islower(c)?"yes":"no"); c='7';
+
+printf("%c:%s\n",c,islower(c)?"yes":"no"); getchar(); return 0; }
+
+
+
+相关函数：<a href="isupper.html">isupper</a>
+
+
+
+
+
+原型：extern int isprint(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为可打印字符（含空格）
+
+
+
+说明：当c为可打印字符（0x20-0x7e）时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isprint.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,isprint(c)?"yes":"no"); c=' ';
+
+printf("%c:%s\n",c,isprint(c)?"yes":"no"); c=0x7f;
+
+printf("%c:%s\n",c,isprint(c)?"yes":"no");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="isgraph.html">isgraph</a>
+
+
+
+
+
+原型：extern int ispunct(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为标点符号
+
+
+
+说明：当c为标点符号时，返回非零值，否则返回零。
+
+　　　标点符号指那些既不是字母数字，也不是空格的可打印字符。
+
+
+
+举例：
+
+
+
+// ispunct.c
+
+#include <syslib.h> #include <ctype.h> #include <string.h>
+
+main()
+
+{
+
+char s[]="Hello, Rain!"; int i;
+
+
+
+clrscr(); // clear screen printf("%s\n",s); for(i=0;i<strlen(s);i++) {
+
+if(ispunct(s[i])) printf("^"); else printf("."); }
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="isalnum.html">isalnum</a>,<a href="isalpha.html">isalpha</a>,<a href="isdigit.html">isdigit</a>,<a href="isxdigit.html">isxdigit</a>,<a href="iscntrl.html">iscntrl</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href='isspace.html"'>isspace</a>
+
+
+
+
+
+原型：extern int isspace(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为空白符
+
+
+
+说明：当c为空白符时，返回非零值，否则返回零。
+
+　　　空白符指空格、水平制表、垂直制表、换页、回车和换行符。
+
+
+
+举例：
+
+
+
+// isspace.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+char s[]="Test Line 1\tend\nTest Line 2\r"; int i;
+
+
+
+clrscr(); // clear screen for(i=0;i<strlen(s);i++) {
+
+if(isspace(s[i])) putchar('.'); else putchar(s[i]); }
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="isalnum.html">isalnum</a>,<a href="isalpha.html">isalpha</a>,<a href="isdigit.html">isdigit</a>,<a href="isxdigit.html">isxdigit</a>,<a href="iscntrl.html">iscntrl</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href="ispunct.html">ispunct</a>
+
+
+
+
+
+原型：extern int isupper(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为大写英文字母
+
+
+
+说明：当c为大写英文字母(A-Z)时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isupper.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,isupper(c)?"yes":"no"); c='A';
+
+printf("%c:%s\n",c,isupper(c)?"yes":"no"); c='7';
+
+printf("%c:%s\n",c,isupper(c)?"yes":"no"); getchar(); return 0; }
+
+
+
+相关函数：<a href="islower.html">islower</a>
+
+
+
+
+
+原型：extern int isxdigit(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：判断字符c是否为十六进制数字
+
+
+
+说明：当c为A-F,a-f或0-9之间的十六进制数字时，返回非零值，否则返回零。
+
+
+
+举例：
+
+
+
+// isxdigit.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); // clear screen c='a';
+
+printf("%c:%s\n",c,isxdigit(c)?"yes":"no"); c='9';
+
+printf("%c:%s\n",c,isxdigit(c)?"yes":"no"); c='*';
+
+printf("%c:%s\n",c,isxdigit(c)?"yes":"no"); getchar(); return 0; }
+
+
+
+相关函数：<a href="isalnum.html">isalnum</a>,<a href="isalpha.html">isalpha</a>,<a href="isdigit.html">isdigit</a>,<a href="iscntrl.html">iscntrl</a>,<a href="isgraph.html">isgraph</a>,<a href="isprint.html">isprint</a>,<a href="ispunct.html">ispunct</a>,<a href='isspace.html"'>isspace</a>
+
+
+
+
+
+原型：extern int toascii(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：将字符c转换为ascii码
+
+
+
+说明：toascii函数将字符c的高位清零，仅保留低七位。返回转换后的数值。
+
+
+
+举例：
+
+
+
+// toascii.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+char s[]="文曲星-BJGGV"; int i=12; // length of string s
+
+clrscr(); // clear screen textmode(0xE0); // make sure LCD mode is 3 big line printf("%s\n",s); for(i=0;i<12;i++) {
+
+putchar(toascii(s[i])); }
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern int tolower(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：将字符c转换为小写英文字母
+
+
+
+说明：如果c为大写英文字母，则返回对应的小写字母；否则返回原来的值。
+
+
+
+举例：
+
+
+
+// tolower.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+char *s="Hello, World!"; int i;
+
+
+
+clrscr(); // clear screen printf("%s\n",s); for(i=0;i<strlen(s);i++) {
+
+putchar(tolower(s[i])); }
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="toupper.html">toupper</a>
+
+
+
+
+
+原型：extern int toupper(int c);
+
+
+
+用法：#include <ctype.h>
+
+功能：将字符c转换为大写英文字母
+
+
+
+说明：如果c为小写英文字母，则返回对应的大写字母；否则返回原来的值。
+
+
+
+举例：
+
+
+
+// toupper.c
+
+#include <syslib.h> #include <ctype.h>
+
+main()
+
+{
+
+char *s="Hello, World!"; int i;
+
+
+
+clrscr(); // clear screen printf("%s\n",s); for(i=0;i<strlen(s);i++) {
+
+putchar(toupper(s[i])); }
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="tolower.html">tolower</a>
+
+
+
+
+
+原型：extern float fabs(float x);
+
+用法：#include <math.h>
+
+功能：求浮点数x的绝对值
+
+
+
+说明：计算|x|, 当x不为负时返回x，否则返回-x
+
+举例：
+
+
+
+// fabs.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=-74.12; printf("|%f|=%f\n",x,fabs(x)); x=0;
+
+printf("|%f|=%f\n",x,fabs(x)); x=74.12; printf("|%f|=%f\n",x,fabs(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="abs.html">abs</a>
+
+
+
+
+
+原型：extern int abs(int x);
+
+
+
+用法：#include <math.h>
+
+功能：求整数x的绝对值
+
+
+
+说明：计算|x|, 当x不为负时返回x，否则返回-x
+
+举例：
+
+
+
+// abs.c
+
+#include <syslib.h> #include <math.h>
+
+main() {
+
+int x;
+
+clrscr(); // clear screen
+
+x=-5; printf("|%d|=%d\n",x,abs(x)); x=0;
+
+printf("|%d|=%d\n",x,abs(x)); x=+5; printf("|%d|=%d\n",x,abs(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="fabs.html">fabs</a>
+
+
+
+
+
+原型：extern float acos(float x);
+
+用法：#include <math.h>
+
+功能：求x（弧度表示）的反余弦值
+
+
+
+说明：x的定义域为[-1.0，1.0]，值域为[0，π]。
+
+
+
+举例：
+
+
+
+// acos.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=0.32; printf("acos(%.2f)=%.4f",x,acos(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="asin.html">asin</a>,<a href="atan.html">atan</a>,<a href="atan2.html">atan2</a>,<a href="sin.html">sin</a>,<a href="cos.html">cos</a>,<a href="tan.html">tan</a>
+
+
+
+
+
+原型：extern float asin(float x);
+
+用法：#include <math.h>
+
+功能：求x（弧度表示）的反正弦值
+
+
+
+说明：x的定义域为[-1.0，1.0]，值域为[-π/2，+π/2]。
+
+
+
+举例：
+
+
+
+// asin.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=0.32; printf("asin(%.2f)=%.4f",x,asin(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="acos.html">acos</a>,<a href="atan.html">atan</a>,<a href="atan2.html">atan2</a>,<a href="sin.html">sin</a>,<a href="cos.html">cos</a>,<a href="tan.html">tan</a>
+
+
+
+
+
+原型：extern float atan(float x);
+
+用法：#include <math.h>
+
+功能：求x（弧度表示）的反正切值
+
+
+
+说明：值域为(-π/2，+π/2)。
+
+
+
+举例：
+
+
+
+// atan.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=0.32; printf("atan(%.2f)=%.4f",x,atan(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="asin.html">asin</a>,<a href="acos.html">acos</a>,<a href="atan2.html">atan2</a>,<a href="sin.html">sin</a>,<a href="cos.html">cos</a>,<a href="tan.html">tan</a>
+
+
+
+
+
+原型：extern float atan2(float y, float x);
+
+用法：#include <math.h>
+
+功能：求y/x（弧度表示）的反正切值
+
+
+
+说明：值域为(-π/2，+π/2)。
+
+
+
+举例：
+
+
+
+// atan2.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x,y;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=0.064; y=0.2;
+
+printf("atan2(%.3f,%.2f)=%.4f",y,x,atan2(y,x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="asin.html">asin</a>,<a href="acos.html">acos</a>,<a href="atan.html">atan</a>,<a href="sin.html">sin</a>,<a href="cos.html">cos</a>,<a href="tan.html">tan</a>
+
+
+
+
+
+原型：extern float ceil(float x);
+
+
+
+用法：#include <math.h>
+
+功能：求不小于x的最小整数
+
+
+
+说明：返回x的上限，如74.12的上限为75，-74.12的上限为-74。返回值为float类型。
+
+
+
+举例：
+
+
+
+// ceil.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=74.12; printf("ceil(%.2f)=%.0f\n",x,ceil(x)); x=-74.12; printf("ceil(%.2f)=%.0f\n",x,ceil(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="floor.html">floor</a>
+
+
+
+
+
+原型：extern float cos(float x);
+
+
+
+用法：#include <math.h>
+
+功能：求x（弧度表示）的余弦值
+
+
+
+说明：返回值在[-1.0，1.0]之间。
+
+
+
+举例：
+
+
+
+// cos.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=PI/4.; printf("cos(%.4f)=%.4f\n",x,cos(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="asin.html">asin</a>,<a href="acos.html">acos</a>,<a href="atan.html">atan</a>,<a href="atan2.html">atan2</a>,<a href="sin.html">sin</a>,<a href="tan.html">tan</a>
+
+
+
+
+
+原型：extern float cosh(float x);
+
+用法：#include <math.h>
+
+功能：求x的双曲余弦值
+
+
+
+说明：cosh(x)=(e^x+e^(-x))/2
+
+
+
+举例：
+
+
+
+// cosh.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=PI/4.; printf("cosh(%.4f)=%.4f\n",x,cosh(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="sinh.html">sinh</a>,<a href="tanh.html">tanh</a>
+
+
+
+
+
+原型：extern float exp(float x);
+
+
+
+用法：#include <math.h>
+
+功能：求e的x次幂
+
+
+
+说明：e=2.718281828...
+
+
+
+举例：
+
+
+
+// exp.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+printf("e=%f\n",exp(1.0));
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern float floor(float x);
+
+用法：#include <math.h>
+
+功能：求不大于x的最达整数
+
+
+
+说明：返回x的下限，如74.12的下限为74，-74.12的下限为-75。返回值为float类型。
+
+
+
+举例：
+
+
+
+// floor.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=74.12; printf("floor(%.2f)=%.0f\n",x,floor(x)); x=-74.12; printf("floor(%.2f)=%.0f\n",x,floor(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="ceil.html">ceil</a>
+
+
+
+
+
+原型：extern float fmod(float x, float y);
+
+用法：#include <math.h>
+
+功能：计算x/y的余数
+
+
+
+说明：返回x-n*y，符号同y。n=[x/y](向离开零的方向取整)
+
+举例：
+
+
+
+// fmod.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x,y;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=74.12; y=6.4;
+
+printf("74.12/6.4: %f\n",fmod(x,y)); x=74.12; y=-6.4;
+
+printf("74.12/(-6.4): %f\n",fmod(x,y));
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern float frexp(float x, int *exp);
+
+用法：#include <math.h>
+
+功能：把浮点数x分解成尾数和指数。
+
+
+
+说明：x=m*2^exp，m为规格化小数。返回尾数m，并将指数存入exp中。
+
+
+
+举例：
+
+
+
+// frexp.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x; int exp;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=frexp(64.0,&exp); printf("64=%.2f*2^%d",x,exp);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="ldexp.html">ldexp</a>,<a href="modf.html">modf</a>
+
+
+
+
+
+原型：extern float ldexp(float x, int exp);
+
+用法：#include <math.h>
+
+功能：装载浮点数。
+
+
+
+说明：返回x*2^exp的值。
+
+
+
+举例：
+
+
+
+// ldexp.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=ldexp(1.0,6); // 1.0*2^6
+
+printf("2^6=%.2f",x);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="frexp.html">frexp</a>,<a href="modf.html">modf</a>
+
+
+
+
+
+原型：extern float modf(float num, float *i);
+
+用法：#include <math.h>
+
+功能：将浮点数num分解成整数部分和小数部分。
+
+
+
+说明：返回小数部分，将整数部分存入*i所指内存中。
+
+
+
+举例：
+
+
+
+// modf.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x, i;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=modf(-74.12,&i); printf("-74.12=%.0f+(%.2f)",i,x);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="frexp.html">frexp</a>,<a href="ldexp.html">ldexp</a>
+
+
+
+
+
+原型：extern float hypot(float x, float y);
+
+用法：#include <math.h>
+
+功能：对于给定的直角三角形的两个直角边，求其斜边的长度。
+
+
+
+说明：返回斜边值。
+
+
+
+举例：
+
+
+
+// hypot.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+printf("3^2+4^2=%.0f^2\n",hypot(3.,4.)); printf("3.2^2+4.3^2=%.2f^2",hypot(x,y));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="frexp.html">frexp</a>,<a href="ldexp.html">ldexp</a>
+
+
+
+
+
+原型：extern float log(float x);
+
+
+
+用法：#include <math.h>
+
+功能：计算x的自然对数。
+
+
+
+说明：x的值应大于零。
+
+
+
+举例：
+
+
+
+// log.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x; clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+printf("ln(e)=%f\n", log(M_E)); // M_E is 2.71828..., defined in math.h
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="log10.html">log10</a>
+
+
+
+
+
+原型：extern float log10(float x);
+
+用法：#include <math.h>
+
+功能：计算x的常用对数。
+
+
+
+说明：x的值应大于零。
+
+
+
+举例：
+
+
+
+// log10.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x; clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+printf("lg(5)=%f\n", log10(5.0));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="log.html">log</a>
+
+
+
+
+
+原型：extern float pow(float x, float y);
+
+用法：#include <math.h>
+
+功能：计算x的y次幂。
+
+
+
+说明：x应大于零，返回幂指数的结果。
+
+
+
+举例：
+
+
+
+// pow.c
+
+
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+printf("4^5=%f",pow(4.,5.));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="pow10.html">pow10</a>
+
+
+
+
+
+原型：extern float pow10(float x);
+
+
+
+用法：#include <math.h>
+
+功能：计算10的x次幂。
+
+
+
+说明：相当于pow(10.0,x)。
+
+
+
+举例：
+
+
+
+// pow10.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+printf("10^3.2=%f\n",pow10(3.2)); printf("10^3.2=%f",pow(10,3.2));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="pow.html">pow</a>
+
+
+
+
+
+原型：extern float sin(float x);
+
+
+
+用法：#include <math.h>
+
+功能：计算x（弧度表示）的正弦值。
+
+
+
+说明：x的值域为[-1.0，1.0]。
+
+
+
+举例：
+
+
+
+// sin.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x; clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=M_PI/2; // M_PI=PI=3.14159265..., defined in math.h printf("sin(PI/2)=%f",sin(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="asin.html">asin</a>,<a href="acos.html">acos</a>,<a href="atan.html">atan</a>,<a href="atan2.html">atan2</a>,<a href="cos.html">cos</a>,<a href="tan.html">tan</a>
+
+
+
+
+
+原型：extern float sinh(float x);
+
+用法：#include <math.h>
+
+功能：计算x（弧度表示）的双曲正弦值。
+
+
+
+说明：sinh(x)=(e^x-e^(-x))/2。
+
+
+
+举例：
+
+
+
+// sinh.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=PI/4.; printf("sinh(%.4f)=%.4f\n",x,sinh(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="cosh.html">cosh</a>,<a href="tanh.html">tanh</a>
+
+
+
+
+
+原型：extern float sqrt(float x);
+
+用法：#include <math.h>
+
+功能：计算x的平方根。
+
+
+
+说明：x应大于等于零。
+
+
+
+举例：
+
+
+
+// sqrt.c
+
+#include <syslib.h> #include <math.h>
+
+main() {
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+printf("sqrt(2000)=%f",sqrt(2000.0));
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern float tan(float x);
+
+
+
+用法：#include <math.h>
+
+功能：计算x（弧度表示）的正切值。
+
+
+
+说明：返回x的正切值。
+
+
+
+举例：
+
+
+
+// tan.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x; clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=M_PI/4; // M_PI=PI=3.14159265..., defined in math.h printf("tan(PI/4)=%f",tan(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="asin.html">asin</a>,<a href="acos.html">acos</a>,<a href="atan.html">atan</a>,<a href="atan2.html">atan2</a>,<a href="sin.html">sin</a>,<a href="cos.html">cos</a>
+
+
+
+
+
+原型：extern float tanh(float x);
+
+用法：#include <math.h>
+
+功能：求x的双曲正切值
+
+
+
+说明：tanh(x)=(e^x-e^(-x))/(e^2+e^(-x))
+
+举例：
+
+
+
+// tanh.c
+
+#include <syslib.h> #include <math.h>
+
+main()
+
+{
+
+float x;
+
+clrscr(); // clear screen textmode(0x00); // 6 lines per LCD screen
+
+x=PI/4.; printf("tanh(%.4f)=%.4f\n",x,tanh(x));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="sinh.html">sinh</a>,<a href="cosh.html">cosh</a>
+
+
+
+
+
+原型：extern int kbhit(void);
+
+
+
+用法：#include <stdio.h>
+
+功能：检测按键
+
+
+
+说明：检测键盘是否有键按下。
+
+如果有键按下，则返回对应键值；否则返回零。
+
+kbhit不等待键盘按键。无论有无按键都会立即返回。
+
+
+
+举例：
+
+
+
+// kbhit.c
+
+#include <stdio.h>
+
+main()
+
+{
+
+int i=0;
+
+clrscr();
+
+while(!kbhit()) {
+
+clrscr(); printf("%05d",i++); }
+
+
+
+clrscr(); printf("End.");
+
+getchar(); return 0; }
+
+
+
+相关函数：<font color="gray">getkey,getch</font>,<a href="getchar.html">getchar</a>
+
+
+
+
+
+原型：extern int getchar(void);
+
+
+
+用法：#include <ctype.h>
+
+功能：读键
+
+
+
+说明：从键盘上读取一个键，并返回该键的键值
+
+getch是到getchar的宏定义
+
+
+
+举例：
+
+
+
+// getchar.c
+
+#include <stdio.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); printf("Press key..."); while((c=getchar())!='Q') {
+
+clrscr(); printf("key: %c\nvalue: %x",c,c); }
+
+}
+
+
+
+相关函数：<font color="gray">getkey</font>,<a href="kbhit.html">kbhit</a>
+
+
+
+
+
+原型：extern void putchar(char c);
+
+
+
+用法：#include <stdio.h>
+
+功能：在屏幕上显示字符c
+
+说明：字符输出在屏幕的当前位置。
+
+可用move或gotoxy改变光标位置。
+
+
+
+举例：
+
+
+
+// putchar.c
+
+#include <stdio.h> #include <system.h>
+
+#define CPR 14
+
+
+
+main()
+
+{
+
+int i,j,k;
+
+
+
+clrscr();
+
+
+
+textmode(0x00); for(i=1;i<6;i++) {
+
+k=i>3?(6-i):i; move(i,CPR/2-k); for(j=1;j<k*2;j++) putchar('*'); }
+
+gotoxy(10,10); // Hide Cursor
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void printf(const char *format,...);
+
+用法：#include <stdio.h>
+
+功能：格式化字符串输出
+
+
+
+说明：format指定输出格式，后面跟要输出的变量
+
+目前printf支持以下格式：
+
+%c 单个字符
+
+%d 十进制整数
+
+%f 十进制浮点数
+
+%o 八进制数
+
+%s 字符串
+
+%u 无符号十进制数
+
+%x 十六进制数
+
+%% 输出百分号%
+
+一个格式说明可以带有几个修饰符，用来指定显示宽度，小数尾书及左对齐等：
+
+- 左对齐
+
++ 在一个带符号数前加"+"或"-"号
+
+0 域宽用前导零来填充，而不是用空白符
+
+域宽是一个整数，设置了打印一个格式化字符串的最小域。精度使用小数点后加数字表示的，
+
+给出每个转换说明符所要输出的字符个数。
+
+<font color="red">注意</font>：带修饰符的显示可能不正常
+
+
+
+举例：
+
+
+
+// printf.c
+
+
+
+#include <stdio.h> #include <system.h>
+
+main()
+
+{
+
+int i;
+
+char *str="GGV";
+
+clrscr();
+
+
+
+textmode(0x00); printf("Printf Demo-%%c"); printf("--------------"); printf("%c-%c-%c-%c\n",'D','e','m','o'); printf("%2c-%2c-%2c-%2c\n",'D','e','m','o'); printf("%02c-%02c-%02c-%02c\n",'D','e','m','o'); printf("%-2c-%-2c-%-2c-%-2c\n",'D','e','m','o');
+
+getchar();
+
+clrscr();
+
+textmode(0x00); // not nessary i=7412;
+
+printf("Printf Demo-%%d"); printf("--------------"); printf("%d\n",i); printf("%14d",i); printf("%+10d\n",i); // output format not correct(bug) printf("%-10d\n",i);
+
+getchar();
+
+clrscr();
+
+printf("Printf - d,o,x"); printf("--------------"); printf("%d\n",i); printf("%o\n",i); // %o and %x not implemented printf("%x\n",i);
+
+getchar();
+
+clrscr();
+
+printf("Printf Demo-%%s"); printf("--------------"); printf(" %s\n","Demo End"); printf(" %s\n","Thanx"); printf(" %s\n %s","Golden","Global View");
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern char *itoa(int i);
+
+
+
+用法：#include <stdlib.h>
+
+功能：把整数i转换成字符串
+
+
+
+说明：返回指向转换后的字符串的指针
+
+
+
+举例：
+
+
+
+// itoa.c
+
+#include <syslib.h> #include <stdlib.h>
+
+main()
+
+{
+
+int i=7412;
+
+clrscr(); // clear screen textmode(0x00);
+
+printf("%d",i); printf("%s",itoa(i));
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void exit(int retval);
+
+用法：#include <stdlib.h>
+
+功能：结束程序
+
+
+
+说明：返回值将被忽略
+
+
+
+举例：
+
+
+
+// exit.c
+
+#include <syslib.h> #include <stdlib.h>
+
+main() {
+
+int i;
+
+clrscr(); // clear screen textmode(0x00);
+
+for(i=0;i<10;i++) {
+
+if(i==5) exit(0); else
+
+{
+
+clrscr(); printf("%d",i); getchar(); }
+
+}
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern int bcmp(const void *s1, const void *s2, int n);
+
+用法：#include <string.h>
+
+功能：比较字符串s1和s2的前n个字节是否相等
+
+
+
+说明：如果s1=s2或n=0则返回零，否则返回非零值。bcmp不检查NULL。
+
+
+
+举例：
+
+
+
+// bcmp.c
+
+
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Golden Global View"; char *s2="Golden global view";;
+
+clrscr(); // clear screen if(!bcmp(s1,s2,7)) printf("s1 equal to s2 in first 7 bytes"); else
+
+printf("s1 not equal to s2 in first 7 bytes");
+
+getchar();
+
+clrscr();
+
+if(!bcmp(s1,s2,12)) printf("s1 equal to s2 in first 12 bytes"); else
+
+printf("s1 not equal to s2 in first 12 bytes");
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="bcopy.html">bcopy</a>,<a href="bzero.html">bzero</a>
+
+
+
+
+
+原型：extern void bcopy(const void *src, void *dest, int n);
+
+用法：#include <string.h>
+
+功能：将字符串src的前n个字节复制到dest中
+
+
+
+说明：bcopy不检查字符串中的空字节NULL，函数没有返回值。
+
+
+
+举例：
+
+
+
+// bcopy.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char d[20];
+
+clrscr(); // clear screen bcopy(s,d,6); printf("s: %s\n",s); printf("d: %s\n",d);
+
+getchar(); clrscr();
+
+s[13]=0;
+
+bcopy(s+7,d,11); // bcopy ignore null in string printf("%s\n",s+7); for(i=0;i<11;i++) putchar(d[i]);
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="bzero.html">bzero</a>
+
+
+
+
+
+原型：extern void bzero(void *s, int n);
+
+用法：#include <string.h>
+
+功能：置字节字符串s的前n个字节为零。
+
+
+
+说明：bzero无返回值。
+
+
+
+举例：
+
+
+
+// bzero.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+struct
+
+{
+
+int a;
+
+char s[5]; float f; } tt;
+
+
+
+char s[20];
+
+bzero(&tt,sizeof(tt)); // struct initialization to zero bzero(s,20);
+
+clrscr(); printf("Initail Success");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="bcopy.html">bcopy</a>
+
+
+
+
+
+原型：extern void *memccpy(void *dest, void *src, unsigned char ch, unsigned int count);
+
+用法：#include <string.h>
+
+功能：由src所指内存区域复制不多于count个字节到dest所指内存区域，如果遇到字符ch则停止复制。
+
+
+
+说明：返回指向字符ch后的第一个字符的指针，如果src前n个字节中不存在ch则返回NULL。ch被复制。
+
+
+
+举例：
+
+
+
+// memccpy.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char d[20],*p;
+
+clrscr();
+
+p=memccpy(d,s,'x',strlen(s)); if(p)
+
+{
+
+*p='\0'; // MUST Do This printf("Char found: %s.\n",d); }
+
+else
+
+printf("Char not found.\n");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memcpy.html">memcpy</a>,<a href="strcpy.html">strcpy</a>
+
+
+
+
+
+原型：extern void *memcpy(void *dest, void *src, unsigned int count);
+
+用法：#include <string.h>
+
+功能：由src所指内存区域复制count个字节到dest所指内存区域。
+
+
+
+说明：src和dest所指内存区域不能重叠，函数返回指向dest的指针。
+
+
+
+举例：
+
+
+
+// memcpy.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char d[20];
+
+clrscr();
+
+memcpy(d,s,strlen(s)); d[strlen(s)]=0; printf("%s",d);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memccpy.html">memccpy</a>,<a href="memmove.html">memmove</a>,<a href="strcpy.html">strcpy</a>
+
+
+
+
+
+原型：extern void *memchr(void *buf, char ch, unsigned count);
+
+用法：#include <string.h>
+
+功能：从buf所指内存区域的前count个字节查找字符ch。
+
+
+
+说明：当第一次遇到字符ch时停止查找。如果成功，返回指向字符ch的指针；否则返回NULL。
+
+
+
+举例：
+
+
+
+// memchr.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Hello, Programmers!"; char *p;
+
+clrscr();
+
+p=memchr(s,'P',strlen(s)); if(p)
+
+printf("%s",p); else
+
+printf("Not Found!");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memccpy.html">memccpy</a>,<a href="memmove.html">memmove</a>,<a href="strcpy.html">strcpy</a>
+
+
+
+
+
+原型：extern int memcmp(void *buf1, void *buf2, unsigned int count);
+
+用法：#include <string.h>
+
+功能：比较内存区域buf1和buf2的前count个字节。
+
+
+
+说明：
+
+当buf1<buf2时，返回值<0
+
+当buf1=buf2时，返回值=0
+
+当buf1>buf2时，返回值>0
+
+
+
+举例：
+
+
+
+// memcmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+r=memcmp(s1,s2,strlen(s1)); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memicmp.html">memicmp</a>,<a href="strcmp.html">strcmp</a>
+
+
+
+
+
+原型：extern int memicmp(void *buf1, void *buf2, unsigned int count);
+
+用法：#include <string.h>
+
+功能：比较内存区域buf1和buf2的前count个字节但不区分字母的大小写。
+
+
+
+说明：memicmp同memcmp的唯一区别是memicmp不区分大小写字母。
+
+当buf1<buf2时，返回值<0
+
+当buf1=buf2时，返回值=0
+
+当buf1>buf2时，返回值>0
+
+
+
+举例：
+
+
+
+// memicmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+r=memicmp(s1,s2,strlen(s1)); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memcmp.html">memcmp</a>,<a href="stricmp.html">stricmp</a>
+
+
+
+
+
+原型：extern void *memmove(void *dest, const void *src, unsigned int count);
+
+用法：#include <string.h>
+
+功能：由src所指内存区域复制count个字节到dest所指内存区域。
+
+
+
+说明：src和dest所指内存区域可以重叠，但复制后src内容会被更改。函数返回指向dest的指针。
+
+
+
+举例：
+
+
+
+// memmove.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View";
+
+clrscr();
+
+memmove(s,s+7,strlen(s)-7); s[strlen(s)-7]=0; printf("%s",s);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memccpy.html">memccpy</a>,<a href="memcpy.html">memcpy</a>,<a href="strcpy.html">strcpy</a>
+
+
+
+
+
+原型：extern void *memset(void *buffer, int c, int count);
+
+用法：#include <string.h>
+
+功能：把buffer所指内存区域的前count个字节设置成字符c。
+
+
+
+说明：返回指向buffer的指针。
+
+
+
+举例：
+
+
+
+// memset.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View";
+
+clrscr();
+
+memset(s,'G',6); printf("%s",s);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bzero.html">bzero</a>,<a href="setmem.html">setmem</a>,<a href="strset.html">strset</a>
+
+
+
+
+
+原型：extern void setmem(void *buf, unsigned int count, char ch);
+
+用法：#include <string.h>
+
+功能：把buf所指内存区域前count个字节设置成字符ch。
+
+
+
+说明：返回指向buf的指针。
+
+
+
+举例：
+
+
+
+// setmem.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View";
+
+clrscr();
+
+setmem(s,6,'G'); printf("%s",s);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bzero.html">bzero</a>,<a href="memset.html">memset</a>,<a href="strset.html">strset</a>
+
+
+
+
+
+原型：extern void movmem(void *src, void *dest, unsigned int count);
+
+用法：#include <string.h>
+
+功能：由src所指内存区域复制count个字节到dest所指内存区域。
+
+
+
+说明：src和dest所指内存区域可以重叠，但复制后src内容会被更改。函数返回指向dest的指针。
+
+
+
+举例：
+
+
+
+// movmem.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View";
+
+clrscr();
+
+
+
+movmem(s,s+7,strlen(s)-7); s[strlen(s)-7]=0; printf("%s",s);
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：<a href="memmove.html">memmove</a>
+
+
+
+
+
+原型：extern char *stpcpy(char *dest,char *src);
+
+用法：#include <string.h>
+
+功能：把src所指由NULL结束的字符串复制到dest所指的数组中。
+
+
+
+说明：src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。
+
+返回指向dest结尾处字符(NULL)的指针。
+
+
+
+举例：
+
+
+
+// stpcpy.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char d[20];
+
+clrscr();
+
+
+
+stpcpy(d,s); printf("%s",d);
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：<a href="strcpy.html">strcpy</a>
+
+
+
+
+
+原型：extern char *strcpy(char *dest,char *src);
+
+用法：#include <string.h>
+
+功能：把src所指由NULL结束的字符串复制到dest所指的数组中。
+
+
+
+说明：src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。
+
+返回指向dest的指针。
+
+
+
+举例：
+
+
+
+// strcpy.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char d[20];
+
+clrscr();
+
+strcpy(d,s); printf("%s",d);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memccpy.html">memccpy</a>,<a href="memcpy.html">memcpy</a>,<a href="stpcpy.html">stpcpy</a>,<a href="strdup.html">strdup</a>
+
+
+
+
+
+原型：extern char *strcat(char *dest,char *src);
+
+用法：#include <string.h>
+
+功能：把src所指字符串添加到dest结尾处(覆盖dest结尾处的'\0')并添加'\0'。
+
+
+
+说明：src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。
+
+返回指向dest的指针。
+
+
+
+举例：
+
+
+
+// strcat.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char d[20]="Golden Global"; char *s=" View";
+
+clrscr();
+
+
+
+strcat(d,s); printf("%s",d);
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：<a href="strncat.html">strncat</a>
+
+
+
+
+
+原型：extern char *strchr(char *s,char c);
+
+用法：#include <string.h>
+
+功能：查找字符串s中首次出现字符c的位置
+
+
+
+说明：返回首次出现c的位置的指针，如果s中不存在c则返回NULL。
+
+
+
+举例：
+
+
+
+// strchr.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char *p;
+
+clrscr();
+
+strchr(s,'V'); if(p)
+
+printf("%s",p); else
+
+printf("Not Found!");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memchr.html">memchr</a>
+
+
+
+
+
+原型：extern int strcmp(char *s1,char * s2);
+
+用法：#include <string.h>
+
+功能：比较字符串s1和s2。
+
+
+
+说明：
+
+当s1<s2时，返回值<0
+
+当s1=s2时，返回值=0
+
+当s1>s2时，返回值>0
+
+
+
+举例：
+
+
+
+// strcmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+
+
+r=strcmp(s1,s2); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="memcmp.html">memcmp</a>,<a href="stricmp.html">stricmp</a>,<a href="strncmp.html">strncmp</a>
+
+
+
+
+
+原型：extern int stricmp(char *s1,char * s2);
+
+用法：#include <string.h>
+
+功能：比较字符串s1和s2，但不区分字母的大小写。
+
+
+
+说明：strcmpi是到stricmp的宏定义，实际未提供此函数。
+
+当s1<s2时，返回值<0
+
+当s1=s2时，返回值=0
+
+当s1>s2时，返回值>0
+
+
+
+举例：
+
+
+
+// stricmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+r=stricmp(s1,s2); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="strcmp.html">strcmp</a>,<a href="stricmp.html">stricmp</a>
+
+
+
+
+
+原型：extern int stricmp(char *s1,char * s2);
+
+用法：#include <string.h>
+
+功能：比较字符串s1和s2，但不区分字母的大小写。
+
+
+
+说明：strcmpi是到stricmp的宏定义，实际未提供此函数。
+
+当s1<s2时，返回值<0
+
+当s1=s2时，返回值=0
+
+当s1>s2时，返回值>0
+
+
+
+举例：
+
+
+
+// stricmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+r=stricmp(s1,s2); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="strcmp.html">strcmp</a>,<a href="stricmp.html">stricmp</a>
+
+
+
+
+
+原型：extern int strcspn(char *s1,char *s2);
+
+用法：#include <string.h>
+
+功能：在字符串s1中搜寻s2中所出现的字符。
+
+
+
+说明：返回第一个出现的字符在s1中的下标值，亦即在s1中出现而s2中没有出现的子串的长度。
+
+
+
+举例：
+
+
+
+// strcspn.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char *r="new"; int n;
+
+
+
+clrscr();
+
+
+
+n=strcspn(s,r); printf("The first char both in s1 and s2 is: %c",s[n]);
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="strpbrk.html">strpbrk</a>
+
+
+
+
+
+原型：extern char *strdup(char *s);
+
+用法：#include <string.h>
+
+功能：复制字符串s
+
+说明：返回指向被复制的字符串的指针，所需空间由malloc()分配且可以由free()释放。
+
+
+
+举例：
+
+
+
+// strdup.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char *d;
+
+clrscr();
+
+d=strdup(s); printf("%s",d);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="memccpy.html">memccpy</a>,<a href="memcpy.html">memcpy</a>,<a href="strcpy.html">strcpy</a>
+
+
+
+
+
+原型：extern int strlen(char *s);
+
+
+
+用法：#include <string.h>
+
+功能：计算字符串s的长度
+
+
+
+说明：返回s的长度，不包括结束符NULL。
+
+
+
+举例：
+
+
+
+// strlen.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View";
+
+clrscr();
+
+printf("%s has %d chars",s,strlen(s));
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern char *strlwr(char *s);
+
+用法：#include <string.h>
+
+功能：将字符串s转换为小写形式
+
+
+
+说明：只转换s中出现的大写字母，不改变其它字符。返回指向s的指针。
+
+
+
+举例：
+
+
+
+// strlwr.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Copywrite 1999-2000 GGV Technologies";
+
+clrscr();
+
+printf("%s",strlwr(s));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="strupr.html">strupr</a>
+
+
+
+
+
+原型：extern char *strupr(char *s);
+
+用法：#include <string.h>
+
+功能：将字符串s转换为大写形式
+
+
+
+说明：只转换s中出现的小写字母，不改变其它字符。返回指向s的指针。
+
+
+
+举例：
+
+
+
+// strupr.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Copywrite 1999-2000 GGV Technologies";
+
+clrscr();
+
+printf("%s",strupr(s));
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="strlwr.html">strlwr</a>
+
+
+
+
+
+原型：extern char *strncat(char *dest,char *src,int n);
+
+用法：#include <string.h>
+
+功能：把src所指字符串的前n个字符添加到dest结尾处(覆盖dest结尾处的'\0')并添加'\0'。
+
+
+
+说明：src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。
+
+返回指向dest的指针。
+
+
+
+举例：
+
+
+
+// strncat.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char d[20]="Golden Global"; char *s=" View WinIDE Library";
+
+clrscr();
+
+
+
+strncat(d,s,5); printf("%s",d);
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="strcat.html">strcat</a>
+
+
+
+
+
+原型：extern int strcmp(char *s1,char * s2，int n);
+
+用法：#include <string.h>
+
+功能：比较字符串s1和s2的前n个字符。
+
+
+
+说明：
+
+当s1<s2时，返回值<0
+
+当s1=s2时，返回值=0
+
+当s1>s2时，返回值>0
+
+
+
+举例：
+
+
+
+// strncmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+r=strncmp(s1,s2,6); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); clrscr();
+
+r=strncmp(s1,s2,10); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="memcmp.html">memcmp</a>,<a href="stricmp.html">stricmp</a>,<a href="strnicmp.html">strnicmp</a>
+
+
+
+
+
+原型：extern int strnicmp(char *s1,char * s2，int n);
+
+用法：#include <string.h>
+
+功能：比较字符串s1和s2的前n个字符但不区分大小写。
+
+
+
+说明：strncmpi是到strnicmp的宏定义
+
+当s1<s2时，返回值<0
+
+当s1=s2时，返回值=0
+
+当s1>s2时，返回值>0
+
+
+
+举例：
+
+
+
+// strnicmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+r=strnicmp(s1,s2,strlen(s1)); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="memcmp.html">memcmp</a>,<a href="stricmp.html">stricmp</a>,<a href="strncmp.html">strncmp</a>
+
+
+
+
+
+原型：extern char *strncpy(char *dest, char *src, int n);
+
+用法：#include <string.h>
+
+功能：把src所指由NULL结束的字符串的前n个字节复制到dest所指的数组中。
+
+
+
+说明：
+
+如果src的前n个字节不含NULL字符，则结果不会以NULL字符结束。
+
+如果src的长度小于n个字节，则以NULL填充dest直到复制完n个字节。
+
+src和dest所指内存区域不可以重叠且dest必须有足够的空间来容纳src的字符串。
+
+返回指向dest的指针。
+
+
+
+举例：
+
+
+
+// strncpy.c
+
+
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char *d="Hello, GGV Programmers"; char *p=strdup(s);
+
+clrscr();
+
+textmode(0x00); // enable 6 lines mode
+
+strncpy(d,s,strlen(s)); printf("%s\n",d);
+
+strncpy(p,s,strlen(d)); printf("%s",p);
+
+
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="memccpy.html">memccpy</a>,<a href="memcpy.html">memcpy</a>,<a href="stpcpy.html">stpcpy</a>,<a href="strcpy.html">strcpy</a>
+
+
+
+
+
+原型：extern char *strpbrk(char *s1, char *s2);
+
+用法：#include <string.h>
+
+功能：在字符串s1中寻找字符串s2中任何一个字符相匹配的第一个字符的位置，空字符NULL不包括在内。
+
+
+
+说明：返回指向s1中第一个相匹配的字符的指针，如果没有匹配字符则返回空指针NULL。
+
+
+
+举例：
+
+
+
+// strpbrk.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Welcome To Beijing"; char *s2="BIT"; char *p;
+
+clrscr();
+
+p=strpbrk(s1,s2); if(p)
+
+printf("%s\n",p); else
+
+printf("Not Found!\n");
+
+p=strpbrk(s1, "Da"); if(p)
+
+printf("%s",p); else
+
+printf("Not Found!");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="strcspn.html">strcspn</a>,<a href="strtok.html">strtok</a>
+
+
+
+
+
+原型：extern char *strrev(char *s);
+
+用法：#include <string.h>
+
+功能：把字符串s的所有字符的顺序颠倒过来（不包括空字符NULL）。
+
+
+
+说明：返回指向颠倒顺序后的字符串指针。
+
+
+
+举例：
+
+
+
+// strrev.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Welcome To Beijing";
+
+clrscr(); textmode(0x00); // 6 lines per screen
+
+printf("%s\n%s",s,strrev(strdup(s)));
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern char *strset(char *s, char c);
+
+用法：#include <string.h>
+
+功能：把字符串s中的所有字符都设置成字符c。
+
+
+
+说明：返回指向s的指针。
+
+
+
+举例：
+
+
+
+// strset.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View";
+
+clrscr();
+
+strset(s,'G'); printf("%s",s);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bzero.html">bzero</a>,<a href="memset.html">memset</a>,<a href="setmem.html">setmem</a>
+
+
+
+
+
+原型：extern char *strstr(char *haystack, char *needle);
+
+用法：#include <string.h>
+
+功能：从字符串haystack中寻找needle第一次出现的位置（不比较结束符NULL)。
+
+
+
+说明：返回指向第一次出现needle位置的指针，如果没找到则返回NULL。
+
+
+
+举例：
+
+
+
+// strstr.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char *l="lob"; char *p;
+
+clrscr();
+
+p=strstr(s,l); if(p)
+
+printf("%s",p); else
+
+printf("Not Found!");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="strchr.html">strchr</a>,<a href="strpbrk.html">strpbrk</a>,<a href="strtok.html">strtok</a>
+
+
+
+
+
+原型：extern char *strtok(char *s, char *delim);
+
+用法：#include <string.h>
+
+功能：分解字符串为一组标记串。s为要分解的字符串，delim为分隔符字符串。
+
+
+
+说明：首次调用时，s必须指向要分解的字符串，随后调用要把s设成NULL。
+
+strtok在s中查找包含在delim中的字符并用NULL('\0')来替换，直到找遍整个字符串。
+
+返回指向下一个标记串。当没有标记串时则返回空字符NULL。
+
+
+
+举例：
+
+
+
+// strtok.c
+
+#include <syslib.h> #include <string.h> #include <stdio.h>
+
+main()
+
+{
+
+char *s="Golden Global View"; char *d=" "; char *p;
+
+
+
+clrscr();
+
+
+
+p=strtok(s,d); while(p)
+
+{
+
+printf("%s\n",s); strtok(NULL,d); }
+
+
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：<a href="strcspn.html">strcspn</a>,<a href="strpbrk.html">strpbrk</a>
+
+
+
+
+
+原型：extern int strnicmp(char *s1,char * s2，int n);
+
+用法：#include <string.h>
+
+功能：比较字符串s1和s2的前n个字符但不区分大小写。
+
+
+
+说明：strncmpi是到strnicmp的宏定义
+
+当s1<s2时，返回值<0
+
+当s1=s2时，返回值=0
+
+当s1>s2时，返回值>0
+
+
+
+举例：
+
+
+
+// strnicmp.c
+
+#include <syslib.h> #include <string.h>
+
+main()
+
+{
+
+char *s1="Hello, Programmers!"; char *s2="Hello, programmers!"; int r;
+
+
+
+clrscr();
+
+r=strnicmp(s1,s2,strlen(s1)); if(!r)
+
+printf("s1 and s2 are identical"); else
+
+if(r<0) printf("s1 less than s2"); else
+
+printf("s1 greater than s2");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="bcmp.html">bcmp</a>,<a href="memcmp.html">memcmp</a>,<a href="stricmp.html">stricmp</a>,<a href="strncmp.html">strncmp</a>
+
+
+
+
+
+原型：extern void clrscr(void);
+
+extern void ClearScreen(void);
+
+用法：#include <system.h>
+
+功能：清屏
+
+
+
+说明：清除屏幕缓冲区及液晶显示缓冲区
+
+光标位置回到屏幕左上角。
+
+
+
+举例：
+
+
+
+// clrscr.c
+
+#include <system.h>
+
+main()
+
+{
+
+clrscr(); textmode(0x00);
+
+printf("Press a key"); getchar(); ClearScreen();
+
+printf("Another Screen"); getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void UpdateLCD(unsigned int mode);
+
+用法：#include <system.h>
+
+功能：以指定模式刷新屏幕
+
+
+
+说明：文曲星屏幕可以按大行（行高16点）或小行（行高8点）显示。
+
+以CC300的屏幕为例，液晶分辨率为112*48即横向可显示112点，纵向可显示48点
+
+由于一个大行占据16点，小行占据8点，故可显示48/16=3大行，或48/8=6小行。
+
+大行和小行可以同屏显示。具体哪一行为大行，娜一行为小行由mode来决定。
+
+mode低字节从bit7-bit0每一位代表一行，为1表示大行，为0表示小行。举例如下：
+
+mode值 对应二进制值 屏幕显示状态
+
+0xE0 11100000 三大行
+
+0xC0 11000000 两大行，两小行
+
+0x80 10000000 一大行，四小行
+
+0x00 00000000 六小行
+
+0x20 00100000 两小行，一大行，两小行
+
+0x40 01000000 一小行，一大行，三小行
+
+...
+
+
+
+以此类推。
+
+
+
+举例：
+
+
+
+// TextOut.c
+
+#include <system.h>
+
+main()
+
+{
+
+clrscr();
+
+printf("Line 1\n"); printf("Line 2\n"); printf("Line 3\n"); printf("Line 4\n"); printf("Line 5\n"); printf("Line 6\n");
+
+UpdateLCD(0x00); // all are visible getchar();
+
+UpdateLCD(0xE0); // only first 3 lines visible getchar();
+
+UpdateLCD(0x40); // line 6 invisible getchar();
+
+UpdateLCD(0x20); // line 6 invisible
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="textmode.html">textmode</a>
+
+
+
+
+
+原型：extern void TextOut(int x, int y, char *str, int mode);
+
+用法：#include <system.h>
+
+功能：在屏幕上指定位置输出字符串
+
+
+
+说明：outtextxy为指向TextOut的宏，用法相同。
+
+str所指向字符串可以为中文或英文。中文显示成16x16点阵，英文显示成8x16点阵。
+
+mode决定往屏幕上写的方式，其值含义如下：
+
+0：背景透明，点阵中为0的点不显示。
+
+1：正常方式，即点阵中为0的点擦除，为1的点显示。
+
+2：反显方式，即点阵中为1的点擦除，为0的点显示。
+
+3：异或方式，即点阵中点的值和屏幕当前位置的值作异或后取值，为0则擦除，为1显示。
+
+
+
+举例：
+
+
+
+// TextOut.c
+
+
+
+#include <system.h>
+
+main()
+
+{
+
+clrscr();
+
+
+
+TextOut(0,0,"文曲星",1); TextOut(10,10,"文曲星",0);
+
+TextOut(20,20,"您好",2); TextOut(30,30,"GGV-金远见",3);
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void bell(void);
+
+
+
+用法：#include <system.h>
+
+功能：响铃
+
+
+
+说明：当在文曲星中，如果所按键在当前功能中不可用，便会发出类似声音。
+
+
+
+举例：
+
+
+
+// bell.c
+
+#include <system.h>
+
+main() {
+
+int c;
+
+clrscr(); printf("press any key\n"); c=getchar();
+
+while(c!=0x1b) {
+
+bell(); c=getchar(); }
+
+
+
+printf("Thank you!");
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void block(int left, int top, int right, int bottom, int mode);
+
+用法：#include <system.h>
+
+功能：在屏幕上画一矩形并填充。
+
+
+
+说明：（left,top）指定左上角坐标，（right,bottom）指定右下角坐标。
+
+mode决定画图方式，其值含义如下：
+
+0：清除方式
+
+1：正常方式
+
+2：反相方式
+
+
+
+举例：
+
+
+
+// block.c
+
+#include <system.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); gotoxy(10,10); // Hide cursor(moved out of screen)
+
+block(1,0,111,47,1); getchar();
+
+block(20,10,100,30,0); getchar();
+
+block(40,0,80,47,2); getchar();
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="rectangle.html">rectangle</a>
+
+
+
+
+
+原型：extern void cursor(int mode);
+
+用法：#include <system.h>
+
+功能：设定光标形态
+
+
+
+说明：mode值含义如下：
+
+0x00：块状光标（默认）
+
+0x80：下划线光标
+
+其它值无意义
+
+
+
+举例：
+
+
+
+// cursor.c
+
+#include <system.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); cursor(0x00); printf("press key to change cursor");
+
+getchar(); cursor(0x80);
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void delay(unsigned int msec);
+
+用法：#include <system.h>
+
+功能：短暂延时
+
+
+
+说明：延时msec*4毫秒
+
+
+
+举例：
+
+
+
+// delay.c
+
+#include <system.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); printf("\nHello, world!");
+
+delay(250); // 250*4=1000msec=1sec
+
+clrscr(); printf("\nHi, guys");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="sleep.html">sleep</a>
+
+
+
+
+
+原型：extern void sleep(unsigned int sec);
+
+用法：#include <system.h>
+
+功能：短暂延时
+
+
+
+说明：延时sec秒
+
+
+
+举例：
+
+
+
+// sleep.c
+
+#include <system.h>
+
+main() {
+
+int c;
+
+clrscr(); printf("\nHello, world!");
+
+sleep(1);
+
+clrscr(); printf("\nHi, guys");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="delay.html">delay</a>
+
+
+
+
+
+原型：extern void textmode(int mode);
+
+用法：#include <system.h>
+
+功能：设定屏幕模式
+
+
+
+说明：请参见UpdateLCD中关于mode的含义。
+
+textmode会影响屏幕上已有内容的显示。
+
+
+
+举例：
+
+
+
+// textmode.c
+
+#include <system.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr(); textmode(0x00); printf("Hello, world!\n"); getchar();
+
+textmode(0xE0); printf("Hi, this is the next mode\n");
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="UpdateLCD.html">UpdateLCD</a>
+
+
+
+
+
+?-?í￡oextern void get_chi_font(char *str, char *buf);
+
+ó?·¨￡o#include <system.h>
+
+1|?ü￡oè?′oo×?μ??ó
+
+?μ?÷￡o°?str?ù???òμ?oo×?μ?16*16μ??ó???￠′?·??úbuf???￡
+
+buf±???ó?×?1?μ?????￡¨>32×??ú￡?à′è??é·μ??μ?ê????￡
+
+??·μ??str???òμ?μúò???oo×?μ?μ??óê????￡·μ??μ?μ??ó??á?è???￡o
+
+
+
+μúò?×??ú ê?áù×??ú
+
+μú??×??ú ê???×??ú
+
+... ...
+
+ê???×??ú μú30×??ú
+
+ê???×??ú μú31×??ú
+
+
+
+?ùà?￡o
+
+
+
+// get_chi_font.c
+
+#include <system.h>
+
+main()
+
+{
+
+char buf[32]; char *s="???ú??",*p; int i,j,k; // Loop variable int x=0,y=0; // screen location to display HZ
+
+int r; // current byte
+
+clrscr();
+
+gotoxy(10,10); // Hide Cursor
+
+p=s;
+
+while(*p)
+
+{
+
+get_chi_font(p,buf); for(i=0;i<2;i++) {
+
+for(j=0;j<16;j++) {
+
+r=buf[i*16+j]; for(k=0;k<8;k++) {
+
+putpixel(x+i*8+k,y+j,((r<<k)&0x80)?1:0); }
+
+}
+
+}
+
+p+=2; // forward a Chinese Character(HZ), two bytes x+=16;
+
+}
+
+
+
+getchar();
+
+return 0;
+
+}
+
+
+
+?à1?oˉê?￡o<a href="write_chi_font.html">write_chi_font</a>
+
+
+
+
+
+原型：extern void get_eng_font(char ch, char *buf, int mode);
+
+用法：#include <system.h>
+
+功能：取英文字符的点阵
+
+
+
+说明：把字符ch的点阵信息存放在buf中。
+
+buf必须有足够的空间容纳返回的数据。
+
+mode=0时返回8x16点阵信息，mode=1时返回8x8点阵信息。
+
+
+
+举例：
+
+
+
+// get_eng_font.c
+
+#include <system.h>
+
+main()
+
+{
+
+char buf[32]; char *s="Global View",*p; int i,j,k; // Loop variable int x=0,y=0; // screen location to display HZ
+
+int r; // current byte
+
+clrscr();
+
+gotoxy(10,10); // Hide Cursor
+
+x=y=0;
+
+
+
+p=s;
+
+while(*p)
+
+{
+
+get_eng_font(*p,buf,0); for(j=0;j<16;j++) {
+
+r=buf[j];
+
+for(k=0;k<8;k++) {
+
+putpixel(x+k,y+j,((r<<k)&0x80)?1:0); }
+
+}
+
+p++; // forward to next character x+=8;
+
+}
+
+
+
+x=0,y=16;
+
+
+
+p=s;
+
+while(*p)
+
+{
+
+get_eng_font(*p,buf,1); for(j=0;j<8;j++) {
+
+r=buf[j];
+
+for(k=0;k<8;k++) {
+
+putpixel(x+k,y+j,((r<<k)&0x80)?1:0); }
+
+}
+
+p++; // forward to next character x+=8;
+
+}
+
+
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="write_eng_font.html">write_eng_font</a>
+
+
+
+
+
+原型：extern int getkey(void);
+
+
+
+用法：#include <system.h>
+
+功能：读键
+
+
+
+说明：功能同getchar
+
+举例：
+
+
+
+// getkey.c
+
+#include <system.h>
+
+main() {
+
+int c;
+
+clrscr(); printf("Press key..."); while((c=getkey())!='Q') {
+
+clrscr(); printf("key: %c\nvalue: %x",c,c); }
+
+}
+
+
+
+相关函数：<font color="gray">getch,getchar,kbhit</font>
+
+
+
+
+
+原型：extern int getpixel(int x, int y);
+
+用法：#include <system.h>
+
+功能：返回屏幕上指定点的状态
+
+
+
+说明：(x,y)为屏幕上点的坐标，如果点为清除状态返回零，否则返回非零值。
+
+
+
+举例：
+
+
+
+// pixel.c
+
+#include <system.h>
+
+main()
+
+{
+
+int i,j;
+
+
+
+clrscr(); printf("V"); gotoxy(10,10); // Hide cursor
+
+for(i=0;i<8;i++) for(j=0;j<16;j++) {
+
+if(getpixel(i,j)) putpixel(10+i,10+j,1); else
+
+putpixel(10+i,10+j,0); }
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="putpixel.html">putpixel</a>
+
+
+
+
+
+原型：extern void putpixel(int x, int y, int mode);
+
+用法：#include <system.h>
+
+功能：在屏幕的指定位置上画点
+
+
+
+说明：(x,y)为屏幕上点的坐标，mode值含义如下：
+
+mode=0：清除（x，y）处的点
+
+1：在（x，y）处画点
+
+2：将（x，y）处的点的状态取反
+
+
+
+举例：
+
+
+
+// pixel.c
+
+#include <system.h>
+
+main()
+
+{
+
+int i,j;
+
+
+
+clrscr();
+
+printf("V"); gotoxy(10,10); // Hide cursor
+
+for(i=0;i<8;i++) for(j=0;j<16;j++) {
+
+if(getpixel(i,j)) putpixel(10+i,10+j,1); else
+
+putpixel(10+i,10+j,0); }
+
+
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：<a href="getpixel.html">getpixel</a>
+
+
+
+
+
+原型：extern void gotoxy(int x, int y);
+
+用法：#include <system.h>
+
+功能：将光标移动到指定位置
+
+
+
+说明：gotoxy（x，y）将光标移动到指定行y和列x。
+
+gotoxy（0，0）将光标移动到屏幕左上角。
+
+move（row，col）是到gotoxy的宏，将光标移动到指定行row和列col move（1，1）将光标移动到屏幕左上角。
+
+举例：
+
+
+
+// gotoxy.c
+
+#include <system.h>
+
+main()
+
+{
+
+int i;
+
+char *scrbuf=(char *)0x280;
+
+/* write to ScreenBuf, faster than printf or putchar */
+
+for(i=0;i<85;i++) scrbuf[i]='+'; UpdateLCD(0x00);
+
+gotoxy(2,2); // row 3, col 3
+
+
+
+getchar();
+
+move(2,2); // row 2, col 2
+
+
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void line(int left, int top, int right, int bottom, int mode);
+
+用法：#include <system.h>
+
+功能：在屏幕上画直线
+
+
+
+说明：（left，top）和（right，bottom）指定直线的两个端点坐标。mode决定划线的模式。
+
+超出屏幕的线将被裁端。
+
+mode值的含义：
+
+mode=0：清除方式
+
+=1：正常方式
+
+=2：取反方式
+
+
+
+举例：
+
+
+
+// line.c
+
+#include <system.h>
+
+main()
+
+{
+
+clrscr(); move(10,10); // hide cursor
+
+block(20,10,100,40,1);
+
+line(1,1,111,47,1); // from top left to bottom right line(1,47,111,1,0); // from bottom left to top right line(112/2,1,112/2,47,2); // line vertically at the middle of the LCD
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void noidle(void);
+
+
+
+用法：#include <system.h>
+
+功能：调用系统例程
+
+
+
+说明：文曲星是单任务系统，为防止应用程序占用过多的系统时间而影响系统程序的执行
+
+同时也为了防止个别程序崩溃而造成系统无法启动，文曲星内核在中断到来时会检
+
+测应用程序所执行的时间，如果在4秒内系统程序没有得到运行，则中断程序将强迫
+
+文曲星进入睡眠状态，即所谓的死机。
+
+因此，当程序运算时间过长（一般为循环过程）时，请调用noidle来防止系统关机。
+
+
+
+举例：
+
+
+
+// noidle.c
+
+#include <system.h>
+
+main()
+
+{
+
+int i,j;
+
+clrscr(); printf("Waiting...\n");
+
+for(i=0;i<10;i++) for(j=0;j<32767;j++) {
+
+noidle(); }
+
+
+
+printf("System Shutdown?");
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void gotoxy(int x, int y);
+
+用法：#include <system.h>
+
+功能：将光标移动到指定位置
+
+
+
+说明：gotoxy（x，y）将光标移动到指定行y和列x。
+
+gotoxy（0，0）将光标移动到屏幕左上角。
+
+move（row，col）是到gotoxy的宏，将光标移动到指定行row和列col move（1，1）将光标移动到屏幕左上角。
+
+举例：
+
+
+
+// gotoxy.c
+
+#include <system.h>
+
+main()
+
+{
+
+int i;
+
+char *scrbuf=(char *)0x280;
+
+/* write to ScreenBuf, faster than printf or putchar */
+
+for(i=0;i<85;i++) scrbuf[i]='+'; UpdateLCD(0x00);
+
+gotoxy(2,2); // row 3, col 3
+
+
+
+getchar();
+
+move(2,2); // row 2, col 2
+
+
+
+getchar(); return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void TextOut(int x, int y, char *str, int mode);
+
+用法：#include <system.h>
+
+功能：在屏幕上指定位置输出字符串
+
+
+
+说明：outtextxy为指向TextOut的宏，用法相同。
+
+str所指向字符串可以为中文或英文。中文显示成16x16点阵，英文显示成8x16点阵。
+
+mode决定往屏幕上写的方式，其值含义如下：
+
+0：背景透明，点阵中为0的点不显示。
+
+1：正常方式，即点阵中为0的点擦除，为1的点显示。
+
+2：反显方式，即点阵中为1的点擦除，为0的点显示。
+
+3：异或方式，即点阵中点的值和屏幕当前位置的值作异或后取值，为0则擦除，为1显示。
+
+
+
+举例：
+
+
+
+// TextOut.c
+
+
+
+#include <system.h>
+
+main()
+
+{
+
+clrscr();
+
+
+
+TextOut(0,0,"文曲星",1); TextOut(10,10,"文曲星",0);
+
+TextOut(20,20,"您好",2); TextOut(30,30,"GGV-金远见",3);
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern char *pyfc(char *str);
+
+用法：#include <system.h>
+
+功能：给定一个汉字str，查询对应的拼音。
+
+
+
+说明：返回一个指向对应拼音字符串。多音字的几个读音之间用空格分隔。
+
+拼音保存在系统缓冲区中。如想保留请将其复制到程序的变量中。
+
+
+
+举例：
+
+
+
+// pyfc.c
+
+#include <system.h> #include <string.h>
+
+main()
+
+{
+
+char *s1,*s2,*s3; clrscr();
+
+s1=strdup(pyfc("文")); s2=strdup(pyfc("曲")); s3=strdup(pyfc("星"));
+
+printf(" 文 曲 星\n"); printf("%s%s%s",s1,s2,s3); // Not right?
+
+
+
+getchar(); while(*s2++!=' '); // uh...'qu' has 2 tones
+
+clrscr(); printf(" 文 曲 星\n"); printf("%s%s%s",s1,s2,s3); // Not right?
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void rectangle(int left, int top, int right, int bottom, int mode);
+
+用法：#include <system.h>
+
+功能：在屏幕上画一矩形。
+
+
+
+说明：（left,top）指定左上角坐标，（right,bottom）指定右下角坐标。
+
+mode决定画图方式，其值含义如下：
+
+0：清除方式
+
+1：正常方式
+
+2：反相方式
+
+
+
+举例：
+
+
+
+// rectangle.c
+
+#include <system.h>
+
+main()
+
+{
+
+int c;
+
+
+
+clrscr();
+
+gotoxy(10,10); // Hide cursor(moved out of screen)
+
+rectangle(1,0,111,47,1); getchar();
+
+
+
+block(10,5,100,40,1); rectangle(20,10,90,30,0); // invisible for clear mode if screen if blank getchar();
+
+
+
+rectangle(40,2,80,42,2); getchar();
+
+
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="block.html">block</a>
+
+
+
+
+
+原型：extern int time(struct tm *pTime);
+
+用法：#include <system.h>
+
+功能：取得系统时间
+
+
+
+说明：结构tm在system.h中定义
+
+struct tm
+
+{
+
+int hsec; /* Half Seconds. [0-119] */
+
+int sec; /* Seconds [0-59] */
+
+int min; /* Minutes [0-59] */
+
+int hour; /* Hours [0-23] */
+
+int day; /* Day [0-30] */
+
+int wday; /* Day of Week [0-6] */
+
+int mon; /* Month [0-11] */
+
+int year; /* Year - 1881 */
+
+};
+
+
+
+举例：
+
+
+
+// timec
+
+
+
+#include <system.h> #define CPR 14
+
+
+
+main()
+
+{
+
+struct tm t1,t2; char wday[][3]={"日","一","二","三","四","五","六"};
+
+clrscr();
+
+textmode(0xE0); time(&t2); while(!kbhit()) {
+
+noidle();
+
+time(&t1); if(t1.hsec==t2.hsec) continue; t2.hsec=t1.hsec; move(1,1);
+
+printf("%d年%2d月%2d日",t1.year+1881,t1.mon+1,t1.day+1); move(2,(CPR-8)/2+1); printf("%d:%d%d:%d%d",t1.hour,t1.min/10,t1.min%10,t1.sec/10,t1.sec%10); move(3,2);
+
+printf("今天是星期%s",wday[t1.wday]); }
+
+
+
+return 0;
+
+}
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void write_chi_font(int x,int y,char *buf);
+
+用法：#include <system.h>
+
+功能：写汉字点阵
+
+
+
+说明：可以把get_chi_font所取回的点阵信息写到屏幕上指定位置。
+
+
+
+举例：
+
+
+
+// write_chi_font.c
+
+#include <system.h>
+
+main()
+
+{
+
+char buf[32]; char *s="文曲星",*p; int x=0,y=0; // screen location to display HZ
+
+
+
+clrscr();
+
+gotoxy(10,10); // Hide Cursor
+
+p=s;
+
+while(*p)
+
+{
+
+get_chi_font(p,buf); write_chi_font(x,y,buf); p+=2; // forward a Chinese Character(HZ), two bytes x+=16;
+
+}
+
+
+
+getchar();
+
+return 0;
+
+}
+
+
+
+相关函数：<a href="get_chi_font.html">get_chi_font</a>
+
+
+
+
+
+原型：extern void write_eng_font(int x,int y,char *buf,int mode);
+
+用法：#include <system.h>
+
+功能：写英文字符的点阵
+
+
+
+说明：把get_eng_font返回的点阵信息写到屏幕上指定位置（x，y）处。
+
+mode=0时写8x16点阵信息，mode=1时写8x8点阵信息。
+
+
+
+<font color="red">注意</font>：此处的（x，y）坐标为屏幕设成6行显示时的文本坐标。0<x<14，0<y<5
+
+
+
+举例：
+
+
+
+// write_eng_font.c
+
+#include <system.h>
+
+main()
+
+{
+
+char buf[32]; char *s="Global View",*p; int x=0,y=0; // screen location to display HZ
+
+
+
+clrscr(); gotoxy(10,10); // Hide Cursor
+
+x=y=0;
+
+
+
+p=s;
+
+while(*p) {
+
+get_eng_font(*p,buf,0); write_eng_font(x,y,buf,0); p++; // forward to next character x++;
+
+}
+
+
+
+x=0,y=2;
+
+
+
+p=s;
+
+while(*p) {
+
+get_eng_font(*p,buf,1); write_eng_font(x,y,buf,1); p++; // forward to next character x++;
+
+}
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="get_eng_font.html">get_eng_font</a>
+
+
+
+
+
+原型：extern void DispBCD(int);
+
+用法：#include <system.h>
+
+功能：显示七段数码管数字
+
+
+
+说明：调用后在屏幕左侧图标区显示对应数字。
+
+显示最大值为999。
+
+
+
+举例：
+
+
+
+// DispBCD.c
+
+#include <system.h>
+
+main() {
+
+int i;
+
+i=9;
+
+clrscr(); printf("Now Display 9"); DispBCD(9); getchar();
+
+i=99; clrscr(); printf("Now Display 99"); DispBCD(99); getchar();
+
+i=999; clrscr(); printf("Now Display 99"); DispBCD(999); getchar();
+
+return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void clrscr(void);
+
+extern void ClearScreen(void);
+
+用法：#include <system.h>
+
+功能：清屏
+
+
+
+说明：清除屏幕缓冲区及液晶显示缓冲区
+
+光标位置回到屏幕左上角。
+
+
+
+举例：
+
+
+
+// clrscr.c
+
+#include <system.h>
+
+main()
+
+{
+
+clrscr(); textmode(0x00);
+
+printf("Press a key"); getchar(); ClearScreen();
+
+printf("Another Screen"); getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void SetDispBar(int sum, int cur);
+
+用法：#include <system.h>
+
+功能：显示滚动条
+
+
+
+说明：调用后在屏幕左侧图标区显示百分比滚动条。
+
+sum为总长度，cur为当前位置。
+
+
+
+举例：
+
+
+
+// SetScrollBar.c
+
+#include <system.h>
+
+main()
+
+{
+
+int i;
+
+
+
+clrscr(); printf("Scroll Bar Test"); for(i=0;i<60;i+=5) {
+
+SetScrollBar(60,i); sleep(1); }
+
+
+
+getchar(); return 0; }
+
+
+
+相关函数：无
+
+
+
+
+
+原型：extern void *malloc(unsigned int num_bytes);
+
+用法：#include <alloc.h>
+
+功能：分配长度为num_bytes字节的内存块
+
+
+
+说明：如果分配成功则返回指向被分配内存的指针，否则返回空指针NULL。
+
+当内存不再使用时，应使用free()函数将内存块释放。
+
+
+
+举例：
+
+
+
+// malloc.c
+
+#include <syslib.h> #include <alloc.h>
+
+main()
+
+{
+
+char *p;
+
+clrscr(); // clear screen
+
+p=(char *)malloc(100); if(p)
+
+printf("Memory Allocated at: %x",p); else
+
+printf("Not Enough Memory!\n");
+
+free(p);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="calloc.html">calloc</a>,<a href="free.html">free</a>,<a href="realloc.html">realloc</a>
+
+
+
+
+
+原型：extern void *calloc(int num_elems, int elem_size);
+
+用法：#include <alloc.h>
+
+功能：为具有num_elems个长度为elem_size元素的数组分配内存
+
+
+
+说明：如果分配成功则返回指向被分配内存的指针，否则返回空指针NULL。
+
+当内存不再使用时，应使用free()函数将内存块释放。
+
+
+
+举例：
+
+
+
+// calloc.c
+
+#include <syslib.h> #include <alloc.h>
+
+main()
+
+{
+
+char *p;
+
+clrscr(); // clear screen
+
+p=(char *)calloc(100,sizeof(char)); if(p)
+
+printf("Memory Allocated at: %x",p); else
+
+printf("Not Enough Memory!\n");
+
+free(p);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="free.html">free</a>,<a href="malloc.html">malloc</a>,<a href="realloc.html">realloc</a>
+
+
+
+
+
+原型：extern void *realloc(void *mem_address, unsigned int newsize);
+
+用法：#include <alloc.h>
+
+功能：改变mem_address所指内存区域的大小为newsize长度。
+
+
+
+说明：如果重新分配成功则返回指向被分配内存的指针，否则返回空指针NULL。
+
+当内存不再使用时，应使用free()函数将内存块释放。
+
+
+
+举例：
+
+
+
+// realloc.c
+
+#include <syslib.h> #include <alloc.h>
+
+main()
+
+{
+
+char *p;
+
+clrscr(); // clear screen
+
+p=(char *)malloc(100); if(p)
+
+printf("Memory Allocated at: %x",p); else
+
+printf("Not Enough Memory!\n");
+
+getchar();
+
+p=(char *)realloc(p,256); if(p)
+
+printf("Memory Reallocated at: %x",p); else
+
+printf("Not Enough Memory!\n");
+
+free(p);
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="calloc.html">calloc</a>,<a href="free.html">free</a>,<a href="malloc.html">malloc</a>
+
+
+
+
+
+原型：extern void free(void *p);
+
+
+
+用法：#include <alloc.h>
+
+功能：释放指针p所指向的的内存空间。
+
+
+
+说明：p所指向的内存空间必须是用calloc,malloc,realloc所分配的内存。
+
+如果p为NULL或指向不存在的内存块则不做任何操作。
+
+
+
+举例：
+
+
+
+// free.c
+
+#include <syslib.h> #include <alloc.h>
+
+main()
+
+{
+
+char *p;
+
+
+
+clrscr(); // clear screen textmode(0x00);
+
+p=(char *)malloc(100); if(p)
+
+printf("Memory Allocated at: %x",p); else
+
+printf("Not Enough Memory!\n");
+
+getchar(); free(p); // release memory to reuse it
+
+p=(char *)calloc(100,1); if(p)
+
+printf("Memory Reallocated at: %x",p); else
+
+printf("Not Enough Memory!\n");
+
+free(p); // release memory at program end
+
+getchar(); return 0; }
+
+
+
+相关函数：<a href="calloc.html">calloc</a>,<a href="malloc.html">malloc</a>,<a href="realloc.html">realloc</a>
+
+
+
+
+
