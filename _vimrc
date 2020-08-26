@@ -35,8 +35,8 @@ set foldmethod=indent
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<cr>
 
 "普通模式和虚拟模式下用快捷键F1实现百科全书功能，配合pkm知识库资源
-nmap <F1> viwy:vimgrep/<C-R>0/gj$VIM/vim*/pkm/*<CR>:botright copen<CR>
-vmap <F1> y:vimgrep/<C-R>0/gj$VIM/vim*/pkm/*<CR>:botright copen<CR>
+nmap <F1> viwy:vimgrep/<C-R>0/gj$VIM/vim*/pkm/**/*<CR>:botright copen<CR>
+vmap <F1> y:vimgrep/<C-R>0/gj$VIM/vim*/pkm/**/*<CR>:botright copen<CR>
 
 "用NERD_commenter插件自动注释并设置快捷键为F2
 map <F2> <leader>c<space>
@@ -58,3 +58,6 @@ set tags=tags;
 
 "开关taglist和NERD_tree插件并设置快捷键为F12
 map <F12> :TlistToggle<CR>:NERDTreeToggle<CR>
+
+"针对gvim打开后窗口最大化
+au GUIEnter * simalt ~x
