@@ -59,5 +59,7 @@ set tags=tags;
 "开关taglist和NERD_tree插件并设置快捷键为F12
 map <F12> :TlistToggle<CR>:NERDTreeToggle<CR>
 
-"针对gvim打开后窗口最大化
-au GUIEnter * simalt ~x
+"针对gvim打开后窗口最大化，去掉注释后开启
+"au GUIEnter * simalt ~x
+"针对gvim字体设置，去掉注释后开启
+"set guifont=SimHei:h14:cANSI
