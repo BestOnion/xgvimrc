@@ -483,7 +483,7 @@ let s:delimiterMap = {
     \ 'wml': { 'left': '#' },
     \ 'wvdial': { 'left': ';' },
     \ 'xdefaults': { 'left': '!' },
-    \ 'xgjspkm': { 'left': '@' },
+    \ 'xgjspkm': { 'left': '#' },
     \ 'xkb': { 'left': '//' },
     \ 'xmath': { 'left': '#' },
     \ 'xpm2': { 'left': '!' },
